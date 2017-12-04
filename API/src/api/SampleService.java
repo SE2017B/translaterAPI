@@ -20,7 +20,6 @@ public class SampleService implements ExportableServiceComponent {
         SampleServicePreconditions.verifyStartingCoordinates(xcoord, ycoord);
         SampleServicePreconditions.verifyWindowDimensions(windowLength, windowWidth);
         // TODO: Run other precondition checks here
-
         // All checks passed; spawn the window
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
     }
@@ -28,12 +27,12 @@ public class SampleService implements ExportableServiceComponent {
     private void showServiceWindow(final int xcoord, final int ycoord, final int windowWidth, final int windowLength) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/sample/sample.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/RequestAPI.fxml"));
         } catch (IOException e) {
             return;
         }
 
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Make New Translation Request");
         primaryStage.setScene(new Scene(root, windowWidth, windowLength));
         primaryStage.setX(xcoord);
         primaryStage.setY(ycoord);

@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import translation.*;
 import Node.*;
-import exceptions.*;
+import api.exceptions.*;
 
 public class RequestController
 {
@@ -41,11 +41,11 @@ public class RequestController
         private String nameStaff;
         private String selectedAlg;
         private ArrayList<String> deps;
-        private ArrayList<Service> serv;
-        private DepartmentSubsystem depSub;
-        private Service servSelect;
+        //private ArrayList<Service> serv;
+        //private DepartmentSubsystem depSub;
+        //private Service servSelect;
         private ServiceRequest reqServPls;
-        private CurrentServiceController currentServiceController;
+        //private CurrentServiceController currentServiceController;
 
         @FXML
         private JFXButton btncreate;
