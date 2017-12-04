@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -20,11 +21,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.Tab;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+
+import javafx.stage.Stage;
 import translation.*;
 import Node.*;
-import exceptions.*;
+import api.exceptions.*;
 
 public class RequestController
 {
@@ -41,11 +43,11 @@ public class RequestController
         private String nameStaff;
         private String selectedAlg;
         private ArrayList<String> deps;
-        private ArrayList<Service> serv;
-        private DepartmentSubsystem depSub;
-        private Service servSelect;
+        //private ArrayList<Service> serv;
+        //private DepartmentSubsystem depSub;
+        //private Service servSelect;
         private ServiceRequest reqServPls;
-        private CurrentServiceController currentServiceController;
+        //private CurrentServiceController currentServiceController;
 
         @FXML
         private JFXButton btncreate;
@@ -200,6 +202,7 @@ public class RequestController
 
     }
 
+    @FXML
     public void requestCreatePressed(ActionEvent e)
     {
         //todo create the request
@@ -218,24 +221,27 @@ public class RequestController
 //        resolveServiceListView.getItems().add(nReq);
 //        //fillInServiceSpecificRecs();
 
+        
+
     }
 
     public void cancelPressed(ActionEvent e)
     {
-        //todo TEST
-        languageChoiceBox.setItems(FXCollections.observableList(new ArrayList<String>()));
-        languageChoiceBox.setValue(null);
-
-        // durationMenu = ((MenuItem) e.getSource()).getText();
-
-        timeMenu.getEditor().clear();
-        dateMenu.getEditor().clear();
-
-        txtNameClient.clear();
-        txtAdditionalComments.clear();
-//        locationChoiceBox.setItems(FXCollections.observableList(
-//                map.getNodesBy(n -> !n.getType().equals("HALL"))));
-
+//        //todo TEST
+//        languageChoiceBox.setItems(FXCollections.observableList(new ArrayList<String>()));
+//        languageChoiceBox.setValue(null);
+//
+//        // durationMenu = ((MenuItem) e.getSource()).getText();
+//
+//        timeMenu.getEditor().clear();
+//        dateMenu.getEditor().clear();
+//
+//        txtNameClient.clear();
+//        txtAdditionalComments.clear();
+////        locationChoiceBox.setItems(FXCollections.observableList(
+////                map.getNodesBy(n -> !n.getType().equals("HALL"))));
+        System.out.println("cancle pressed");
+        ((Stage)cancelStaffButton.getScene().getWindow()).close();
     }
 
     public void timeSelected(ActionEvent e)
@@ -300,6 +306,7 @@ public class RequestController
     {
         //todo ADJUST FOR API
 
+       //event.getSource()
     }
 
     @FXML
@@ -321,4 +328,6 @@ public class RequestController
     {
         //todo exit from API
     }
+
+
 }

@@ -17,7 +17,7 @@ public class Node{
     private String type;    //type of node
     private String building; //building where node is located
     //private ArrayList<Edge> connections; //connection for node
-    private Node.FloorNumber floor;  //floor on which node is on
+    private FloorNumber floor;  //floor on which node is on
     private int x;  //x-coordinate of node
     private int y;  //y-coordinate of node
     private String team;
@@ -30,7 +30,7 @@ public class Node{
         this.type = type;
         this.building = building;
         //this.connections = new ArrayList<>();
-        this.floor = Node.FloorNumber.fromDbMapping(floor);
+        this.floor = FloorNumber.fromDbMapping(floor);
         this.x = Integer.parseInt(x);
         this.y = Integer.parseInt(y);
         this.team = team;
@@ -94,7 +94,7 @@ public class Node{
 //    public ArrayList<Edge> getConnections() {
 //        return this.connections;
 //    }
-    public Node.FloorNumber getFloor() {
+    public FloorNumber getFloor() {
         return floor;
     }
     public String getTeam() {
@@ -142,7 +142,7 @@ public class Node{
         this.building = building;
     }
     public void setFloor(String floor) {
-        this.floor = Node.FloorNumber.fromDbMapping(floor);
+        this.floor = FloorNumber.fromDbMapping(floor);
     }
     public void setX(String x){
         this.x = Integer.parseInt(x);

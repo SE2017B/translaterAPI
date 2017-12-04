@@ -15,8 +15,8 @@ public enum FloorNumber {
         this.nodeMapping = nodeMapping;
     }
 
-    public static Node.FloorNumber fromDbMapping(String dbMapping) {
-        for (Node.FloorNumber floorNumber : Node.FloorNumber.values()) {
+    public static FloorNumber fromDbMapping(String dbMapping) {
+        for (FloorNumber floorNumber : FloorNumber.values()) {
             if (floorNumber.dbMapping.equals(dbMapping)) {
                 return floorNumber;
             }
