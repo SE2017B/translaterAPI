@@ -1,9 +1,9 @@
 package api;
 
+import api.exceptions.InvalidCoordinatesException;
+import api.exceptions.InvalidWindowDimensionsException;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
-import teamh.api.exceptions.InvalidCoordinatesException;
-import teamh.api.exceptions.InvalidWindowDimensionsException;
 
 class SampleServicePreconditions {
     private static final int MIN_WINDOW_WIDTH = 200;

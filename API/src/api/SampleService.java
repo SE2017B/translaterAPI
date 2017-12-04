@@ -1,10 +1,10 @@
 package api;
 
+import api.exceptions.ServiceException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import teamh.api.exceptions.ServiceException;
 
 import java.io.IOException;
 
