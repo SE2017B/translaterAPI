@@ -22,8 +22,12 @@ import javafx.scene.control.Tab;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import translation.*;
+import Node.*;
+import exceptions.*;
 
-public class RequestController {
+public class RequestController
+{
 
         //private ScreenController parent;
         //private HospitalMap map;
@@ -140,7 +144,8 @@ public class RequestController {
         private JFXButton btnEditMap;
 
 
-    public void init(){
+    public void init()
+    {
 //        map = HospitalMap.getMap();
 
 //        choiceBoxDept.valueProperty().addListener( (v, oldValue, newValue) -> deptSelected(newValue));
@@ -166,7 +171,8 @@ public class RequestController {
 //        );
     }
 
-    public void onShow(){
+    public void onShow()
+    {
         // todo check population of request list upon start
 //        System.out.println(depSub.getCurrentLoggedIn().getAllRequest());
 //        if(depSub.getCurrentLoggedIn().getAllRequest().isEmpty())
@@ -176,11 +182,6 @@ public class RequestController {
 //            resolveServiceListView.getItems().addAll(depSub.getCurrentLoggedIn().getAllRequest());
 //        }
 
-
-        //todo populate location
-        //Update the nodes in the map
-
-
         //todo populate choice boxes upon start
     }
     @FXML
@@ -188,14 +189,14 @@ public class RequestController {
     public void resolveServicePressed(ActionEvent e)
     {
 
-    //todo  adjust for API
-//        resolveServiceListView.getItems().removeAll(resolveServiceListView.getSelectionModel().getSelectedItems());
-//        System.out.println("Requests " + (resolveServiceListView.getSelectionModel().getSelectedItems()) + "resolved");
-//
-//        lblSelectedService.setText("Service");
-//        lblSelectedAdditionalInfo.setText("Location");
-//        lblSelectedDT.setText("Date & Time");
-//        lblSelectedLocation.setText("Additional Info");
+    //todo TEST
+        resolveServiceListView.getItems().removeAll(resolveServiceListView.getSelectionModel().getSelectedItems());
+        System.out.println("Requests " + (resolveServiceListView.getSelectionModel().getSelectedItems()) + "resolved");
+
+        lblSelectedService.setText("Request");
+        lblSelectedAdditionalInfo.setText("Location");
+        lblSelectedDT.setText("Date & Time");
+        lblSelectedLocation.setText("Additional Info");
 
     }
 
@@ -219,33 +220,9 @@ public class RequestController {
 
     }
 
-//    private String fillInServiceSpecificRecs() {
-//        Service service = choiceBoxService.getValue();
-//
-//        return currentServiceController.getInputData();
-//
-//        if(service.toString().equalsIgnoreCase("Translation Service")){
-//            //Sets the language to the service, form the controller
-//            ((Translation)service).setRequestedLanguage(((TranslationController)this.currentServiceController).getLanguageSel());
-//            //Sets the duration of the session to the service, form the controller
-//            ((Translation)service).setDuration(Integer.parseInt(((TranslationController)this.currentServiceController).getDuration()));
-//        }
-//        else if(service.toString().equalsIgnoreCase("Transport Service")){
-//            //Sets the end location to the service
-//            ((Transport)service).setEndLocation(((TransportController)this.currentServiceController).returnNode());
-//        }
-//        else if(service.toString().equalsIgnoreCase("Sanitation")){
-//            ((Sanitation)service).setRequestedService(((SanitationController)this.currentServiceController).getSanSel());
-//        }
-//        else if(service.toString().equalsIgnoreCase("Food Delivery Service")){
-//            ((FoodDelivery)service).setSelectedFood(((FoodDeliveryController)this.currentServiceController).getFoodSelected());
-//            ((FoodDelivery)service).setAllergies(((FoodDeliveryController)this.currentServiceController).getAllergy());
-//        }
-//    }
-
     public void cancelPressed(ActionEvent e)
     {
-        //todo test
+        //todo TEST
         languageChoiceBox.setItems(FXCollections.observableList(new ArrayList<String>()));
         languageChoiceBox.setValue(null);
 
@@ -261,20 +238,23 @@ public class RequestController {
 
     }
 
-    public void timeSelected(ActionEvent e) {
-        //todo undo comments
+    public void timeSelected(ActionEvent e)
+    {
         System.out.println("Time selescted");
         time = ((JFXTimePicker)e.getSource()).getValue().toString();
     }
 
-    public void dateSelected(ActionEvent e){
+    public void dateSelected(ActionEvent e)
+    {
         System.out.println("Date Selected" );
         date = ((JFXDatePicker)e.getSource()).getValue().toString();
     }
 
     @FXML
-    void createStaffPressed(ActionEvent event) {
+    void createStaffPressed(ActionEvent event)
+    {
 //
+        //todo ADJUST FOR API
 //        String tempUsername = usernameTxt.getText();
 //        String tempPassword = passwordTxt.getText();
 //        String tempJobTitle = jobTitletxt.getText();
@@ -290,12 +270,16 @@ public class RequestController {
 
 
     @FXML
-    void makeModify(ActionEvent event) {
+    void makeModify(ActionEvent event)
+    {
+        //todo ADJUST FOR API
 
     }
 
     @FXML
-    void removeStaffPressed(ActionEvent event) {
+    void removeStaffPressed(ActionEvent event)
+    {
+        //todo ADJUST FOR API
 //        String tempUsername = usernameDeleteTxt.getText();
 //        Service tempService = staffJobTypeChoiceBox.getValue();
 //
@@ -305,27 +289,36 @@ public class RequestController {
     }
 
     @FXML
-    void searchbuttonPressed(ActionEvent event) {
+    void searchbuttonPressed(ActionEvent event)
+    {
+        //todo ADJUST FOR API
 
     }
 
     @FXML
-    void cancelStaffPressed(ActionEvent event) {
+    void cancelStaffPressed(ActionEvent event)
+    {
+        //todo ADJUST FOR API
 
-            }
+    }
 
-@FXML
-    void durationSelected(ActionEvent event) {
+    @FXML
+    void durationSelected(ActionEvent event)
+    {
 
-            }
+    //todo ADJUST FOR API
+    }
 
-@FXML
-    void editStaffPressed(ActionEvent event) {
+    @FXML
+    void editStaffPressed(ActionEvent event)
+    {
+    //todo ADJUST FOR API
 
-            }
+}
 
-@FXML
-    void logoutPressed(ActionEvent event) {
+    @FXML
+    void logoutPressed(ActionEvent event)
+    {
         //todo exit from API
-            }
+    }
 }
