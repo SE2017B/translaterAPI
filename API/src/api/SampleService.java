@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class SampleService implements ExportableServiceComponent {
@@ -25,18 +24,26 @@ public class SampleService implements ExportableServiceComponent {
     }
 
     private void showServiceWindow(final int xcoord, final int ycoord, final int windowWidth, final int windowLength) {
-        Parent root = null;
+        Parent root;
+        System.out.println(".3");
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/RequestAPI.fxml"));
+            System.out.println(".2");
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             return;
         }
-
+        System.out.println("1");
         primaryStage.setTitle("Make New Translation Request");
+        System.out.println("2");
         primaryStage.setScene(new Scene(root, windowWidth, windowLength));
+        System.out.println("3");
         primaryStage.setX(xcoord);
+        System.out.println("4");
         primaryStage.setY(ycoord);
+        System.out.println("5");
         primaryStage.show();
+        System.out.println("6");
     }
 
     public static SampleService newInstance(final Stage primaryStage) {
