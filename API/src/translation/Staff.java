@@ -26,7 +26,7 @@ public class Staff{
     public Staff(String username, String password, String jobTitle, String fullName, int ID){
         this.username = username;
         this.password = password;
-        this.jobTitle = jobTitle;
+        this.jobTitle = "Sanitation";
         this.fullName = fullName;
         this.ID = ID;
 
