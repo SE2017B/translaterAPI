@@ -153,7 +153,7 @@ public class serviceDatabase {
     }
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Get all staff members from the staff table
+    // Get all service requests from the serviceRequest table
     ///////////////////////////////////////////////////////////////////////////////
     public static ArrayList<ServiceRequest> queryAllServices() {
 
@@ -207,5 +207,62 @@ public class serviceDatabase {
         return resultServices;
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // Get all service requests for a given staff member
+    ///////////////////////////////////////////////////////////////////////////////
 
+    public static ArrayList<ServiceRequest> findStaffMemRequests(Staff anyStaff) {
+
+        ArrayList<ServiceRequest> resultServices = new ArrayList<>();
+        String anyUser = anyStaff.getUsername();
+
+        try {
+            conn = DriverManager.getConnection(JDBC_URL_API);
+            conn.setAutoCommit(false);
+            conn.getMetaData();
+
+            String staffMemServices = "SELECT * FROM serviceRequests WHERE username = ?";
+
+            PreparedStatement selectStaffServices = conn.prepareStatement(staffMemServices);
+            selectStaffServices.setString(1, anyUser);
+
+            ResultSet rsetStaffServices = selectStaffServices.executeQuery();
+
+            Integer intServiceID;
+            String strLocID;
+            String strTime;
+            String strDate;
+            String strStaffID;
+            String strSeverity;
+            String strComments;
+
+            //Process the results
+            while (rsetStaffServices.next()) {
+
+                intServiceID = rsetStaffServices.getInt("requestID");
+                strLocID = rsetStaffServices.getString("locationID");
+                strTime = rsetStaffServices.getString("time");
+                strDate = rsetStaffServices.getString("date");
+                strStaffID = rsetStaffServices.getString("staffID");
+                strSeverity = rsetStaffServices.getString("severity");
+                strComments = rsetStaffServices.getString("comments");
+
+                Staff someStaff = staffDatabase.findAStaff(strStaffID);
+                Node someNode = nodeDatabase.findANode(strLocID);
+                resultServices.add(new ServiceRequest(intServiceID, someNode, strTime, strDate, someStaff, strSeverity, strComments));
+
+            } // End While
+
+            conn.commit();
+            System.out.println();
+
+            rsetStaffServices.close();
+            selectStaffServices.close();
+            conn.close();
+        } // end try
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultServices;
+    }
 }
