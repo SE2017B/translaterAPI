@@ -7,19 +7,11 @@
 */
 package Controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTimePicker;
+import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 
 import java.util.ArrayList;
 
@@ -27,6 +19,7 @@ import javafx.stage.Stage;
 import translation.*;
 import Node.*;
 import api.exceptions.*;
+import database.*;
 
 public class RequestController
 {
@@ -37,13 +30,17 @@ public class RequestController
         private String time;
         private Staff staffMember;
         private String date;
+        private String comments;
+        private String severity;
         private String nameServiceFile;
         private String nameDept;
         private String nameService;
         private String nameStaff;
         private String selectedAlg;
+        private static Node location;
+        private int requestIDCount;
         private ArrayList<String> deps;
-        //private ArrayList<Service> serv;
+        private ArrayList<String> tasksList;
         //private DepartmentSubsystem depSub;
         //private Service servSelect;
         private ServiceRequest reqServPls;
@@ -65,13 +62,13 @@ public class RequestController
         private ChoiceBox<Staff> staffChoiceBox;
 
         @FXML
-        private ChoiceBox<String> languageChoiceBox;
+        private ChoiceBox<String> taskChoiceBox;
 
         @FXML
         private JFXTextField txtNameClient;
 
         @FXML
-        private JFXTextField txtAdditionalComments;
+        private JFXTextArea txtAreaComments;
 
         @FXML
         private MenuButton durationMenu;
@@ -113,6 +110,18 @@ public class RequestController
         private JFXButton cancelStaffButton;
 
         @FXML
+        private MenuButton severityMenu;
+
+        @FXML
+        private MenuItem lowseverityMenu;
+
+        @FXML
+        private MenuItem mildseverityMenu;
+
+        @FXML
+        private MenuItem extremeseverityMenu;
+
+        @FXML
         private JFXTextField usernameDeleteTxt;
 
         @FXML
@@ -148,8 +157,13 @@ public class RequestController
 
     public void init()
     {
-//        map = HospitalMap.getMap();
-
+            tasksList = new ArrayList<String>();
+            tasksList.add("Clean Room");
+            tasksList.add("Room Prep");
+            tasksList.add("Clean Up Hazardous Waste");
+            tasksList.add("Clean Up Non-Hazardous Waste");
+            tasksList.add("Repair");
+            tasksList.add("");
 //        choiceBoxDept.valueProperty().addListener( (v, oldValue, newValue) -> deptSelected(newValue));
 //        choiceBoxService.valueProperty().addListener( (v, oldValue, newValue) -> servSelected(newValue));
 //        choiceBoxStaff.valueProperty().addListener( (v, oldValue, newValue) -> staffSelected(newValue));
@@ -176,6 +190,14 @@ public class RequestController
     public void onShow()
     {
         // todo check population of request list upon start
+        //staff choice box set up
+        ArrayList<Staff> staffForCB = new ArrayList<Staff>();
+        staffForCB.addAll(staffDatabase.queryAllStaff());
+        staffChoiceBox.getItems().addAll(staffForCB);
+
+        //todo when tasks made finish this
+        //taskChoiceBox set up
+        taskChoiceBox.getItems().addAll();
 //        System.out.println(depSub.getCurrentLoggedIn().getAllRequest());
 //        if(depSub.getCurrentLoggedIn().getAllRequest().isEmpty())
 //        {
@@ -202,27 +224,30 @@ public class RequestController
 
     }
 
+    public static void setLocation(String locID){
+        Node loc = nodeDatabase.findANode(locID);
+        location = loc;
+    }
+
     @FXML
     public void requestCreatePressed(ActionEvent e)
     {
         //todo create the request
-//        requestIDCount++;
-//
-//        //fillInServiceSpecificRecs();
-//
+        requestIDCount++;
+
+
+        staffMember = staffChoiceBox.getSelectionModel().getSelectedItem();
+        comments = txtAreaComments.getText();
+        ServiceRequest serv;
+        serv = new ServiceRequest(requestIDCount, location, time, date, staffMember, severity, comments);
 //        //Submit request
 //        //depSub.submitRequest(choiceBoxService.getValue(), timeMenu.getValue().toString(), dateMenu.getValue().toString() , locationChoiceBox.getValue(), choiceBoxStaff.getValue(),requestIDCount, false, "EMAIL");
 //
 //        //ServiceRequest nReq = new ServiceRequest(choiceBoxService.getValue(), requestIDCount, locationChoiceBox.getValue(), timeMenu.getValue().toString(), dateMenu.getValue().toString(), choiceBoxStaff.getValue());
 //
-//        //Add new service to List
-//        System.out.println("request submitted");
-//        nReq.setInputData(currentServiceController.getInputData());
-//        resolveServiceListView.getItems().add(nReq);
-//        //fillInServiceSpecificRecs();
-
-        
-
+        //Add new service to List
+        System.out.println("request submitted");
+        resolveServiceListView.getItems().add(serv);
     }
 
     public void cancelPressed(ActionEvent e)
@@ -231,17 +256,16 @@ public class RequestController
 //        languageChoiceBox.setItems(FXCollections.observableList(new ArrayList<String>()));
 //        languageChoiceBox.setValue(null);
 //
-//        // durationMenu = ((MenuItem) e.getSource()).getText();
+        //severityMenu = ((MenuItem) e.getSource()).getText().toString();
 //
-//        timeMenu.getEditor().clear();
-//        dateMenu.getEditor().clear();
+        timeMenu.getEditor().clear();
+        dateMenu.getEditor().clear();
 //
-//        txtNameClient.clear();
-//        txtAdditionalComments.clear();
-////        locationChoiceBox.setItems(FXCollections.observableList(
-////                map.getNodesBy(n -> !n.getType().equals("HALL"))));
-        System.out.println("cancle pressed");
-        ((Stage)cancelStaffButton.getScene().getWindow()).close();
+        txtAreaComments.clear();
+        //severityMenu.;
+
+        System.out.println("cancel pressed");
+
     }
 
     public void timeSelected(ActionEvent e)
@@ -261,25 +285,18 @@ public class RequestController
     {
 //
         //todo ADJUST FOR API
-//        String tempUsername = usernameTxt.getText();
-//        String tempPassword = passwordTxt.getText();
-//        String tempJobTitle = jobTitletxt.getText();
-//        String tempFullName = fullNametxt.getText();
-//        Service tempService = addStaffServiceChoiceBox.getValue();
+        String tempUsername = usernameTxt.getText();
+        String tempPassword = passwordTxt.getText();
+        String tempFullName = fullNametxt.getText();
+
+        System.out.println(usernameTxt.getText() + " " + passwordTxt.getText() + " " + fullNametxt.getText());
+        //Service tempService = addStaffServiceChoiceBox.getValue();
 //
 //
 //        staffDatabase.incStaffCounter();
 //        depSub.addStaff(tempService, tempUsername, tempPassword, tempJobTitle, tempFullName, staffDatabase.getStaffCounter());
 //
 //        staffListView.setItems(FXCollections.observableList(staffDatabase.getStaff()));
-    }
-
-
-    @FXML
-    void makeModify(ActionEvent event)
-    {
-        //todo ADJUST FOR API
-
     }
 
     @FXML
@@ -294,12 +311,6 @@ public class RequestController
 //        staffListView.setItems(FXCollections.observableList(staffDatabase.getStaff()));
     }
 
-    @FXML
-    void searchbuttonPressed(ActionEvent event)
-    {
-        //todo ADJUST FOR API
-
-    }
 
     @FXML
     void cancelStaffPressed(ActionEvent event)
@@ -310,10 +321,12 @@ public class RequestController
     }
 
     @FXML
-    void durationSelected(ActionEvent event)
+    void severitySelected(ActionEvent e)
     {
-
     //todo ADJUST FOR API
+        severity = ((MenuItem) e.getSource()).getText();
+        severityMenu.setText(severity);
+
     }
 
     @FXML
@@ -327,7 +340,11 @@ public class RequestController
     void logoutPressed(ActionEvent event)
     {
         //todo exit from API
+        ((Stage)cancelStaffButton.getScene().getWindow()).close();
+
     }
+
+
 
 
 }
