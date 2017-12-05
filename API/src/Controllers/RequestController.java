@@ -355,7 +355,9 @@ public class RequestController
 
         ArrayList<Staff> tempAL = new ArrayList<>(staffForCB);
         //todo ADJUST FOR API
-        tempAL.remove(staffListView.getSelectionModel().getSelectedItem());
+        if(tempAL.remove(staffListView.getSelectionModel().getSelectedItem())){
+            System.out.println("cant find the node");
+        }
 
         staffDatabase.deleteStaff(staffListView.getSelectionModel().getSelectedItem());
 
@@ -372,8 +374,10 @@ public class RequestController
         staffListView1.setItems(FXCollections.observableList(tempAL));
         staffChoiceBox.setItems(FXCollections.observableList(tempAL));
         staffResolveServiceChoiceBox.setItems(FXCollections.observableList(tempAL));
-
-        staffForCB.addAll(tempAL);
+        if(staffForCB.isEmpty()) {
+            System.out.println("life is good");
+            staffForCB.addAll(tempAL);
+        }
 //        depSub.deleteStaff(tempService, tempUsername);
 //
 //        staffListView.setItems(FXCollections.observableList(staffDatabase.getStaff()));
