@@ -34,11 +34,6 @@ public class nodeDatabase {
     // All nodes from the node table in hospitalMapDB
     static ArrayList<Node> allNodes=new ArrayList<>();
 
-    // Getter for Arraylist of all nodes
-    //public static ArrayList<Node> getNodes(){
-        //return allNodes;
-    //}
-
     ///////////////////////////////////////////////////////////////////////////////
     // Delete nodes table
     ///////////////////////////////////////////////////////////////////////////////

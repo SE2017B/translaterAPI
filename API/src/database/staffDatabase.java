@@ -4,12 +4,8 @@ package database;
 import translation.Staff;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Scanner;
 
 public class staffDatabase {
@@ -25,16 +21,14 @@ public class staffDatabase {
     // Staff Primary Key Counter
     private static int staffCounter;
 
-    public static void incStaffCounter() {
+    public static int getStaffCounter() {
+        int tempCount = staffCounter;
         staffCounter++;
+        return tempCount;
     }
 
     // All staff members from the staff table in hospitalStaffDB
     static ArrayList<Staff>allStaff=new ArrayList<>();
-    static ArrayList<String>allLanguages = new ArrayList<>();
-
-    // Getter for all staff array list
-    public static ArrayList<Staff> getStaff(){ return allStaff; }
 
     ///////////////////////////////////////////////////////////////////////////////
     // Delete staff table
@@ -250,7 +244,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     public static ArrayList<Staff> queryAllStaff() {
 
-        ArrayList<Staff> resultStaff = null;
+        ArrayList<Staff> resultStaff = new ArrayList<>();
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_STAFF);
@@ -267,9 +261,6 @@ public class staffDatabase {
             String strFullname;
             Integer intStaffID;
 
-            //System.out.println("");
-            //System.out.printf("%-20s %-65s %-20s %-30s %-20s\n", "staffID", "password", "jobTitle", "fullName", "ID");
-
             //Process the results
             while (rsetAllStaff.next()) {
                 strUsername = rsetAllStaff.getString("username");
@@ -280,7 +271,6 @@ public class staffDatabase {
 
                 resultStaff.add(new Staff(strUsername, strPW, strTitle, strFullname, intStaffID));
 
-                //System.out.printf("%-20s %-65s %-20s %-30s %-20d\n", strUsername, strPW, strTitle, strFullname, intStaffID);
             } // End While
 
             conn.commit();
@@ -351,10 +341,6 @@ public class staffDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static int getStaffCounter() {
-        return staffCounter;
     }
 }
 

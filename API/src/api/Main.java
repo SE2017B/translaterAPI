@@ -47,12 +47,14 @@ public class Main extends Application {
         nodeDatabase.insertNodesFromCSV();
 
         staffDatabase.readStaffCSV("API/src/csv/staffMembers.csv");
+        staffDatabase.insertStaffFromCSV();
 
-        System.out.println("Node =" + nodeDatabase.findANode("IREST00203"));
-        System.out.println("Staff = " + staffDatabase.queryAllStaff());
+        nodeDatabase.findANode("IREST00203");
+        staffDatabase.queryAllStaff();
 
         launch(args);
 
         nodeDatabase.outputNodesCSV();
+        staffDatabase.outputStaffCSV();
     }
 }
