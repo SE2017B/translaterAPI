@@ -312,6 +312,57 @@ public class staffDatabase {
     }
 
     ///////////////////////////////////////////////////////////////////////////////
+    // Query all nodes from the node table
+    ///////////////////////////////////////////////////////////////////////////////
+    public static Staff findAStaff(String anyStaffID) {
+        Staff resultStaff = null;
+        try {
+            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn.setAutoCommit(false);
+            conn.getMetaData();
+
+            //Statement selectANode = conn.createStatement();
+            String aStaff = "SELECT * FROM HOSPITALSTAFF WHERE ID = ?";
+
+            PreparedStatement selectAStaff = conn.prepareStatement(aStaff);
+            selectAStaff.setString(1, anyStaffID);
+
+            ResultSet rsetAStaff = selectAStaff.executeQuery();
+
+            //Process the results
+            String strUsername;
+            String strPW;
+            String strTitle;
+            String strFullname;
+            Integer intStaffID;
+
+            //Process the results
+            while (rsetAStaff.next()) {
+                strUsername = rsetAStaff.getString("username");
+                strPW = rsetAStaff.getString("password");
+                strTitle = rsetAStaff.getString("jobTitle");
+                strFullname = rsetAStaff.getString("fullName");
+                intStaffID = rsetAStaff.getInt("ID");
+
+                resultStaff = new Staff(strUsername, strPW, strTitle, strFullname, intStaffID);
+
+            } // End While
+
+            conn.commit();
+            System.out.println();
+
+            rsetAStaff.close();
+            selectAStaff.close();
+            conn.close();
+
+        } // end try
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultStaff;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
     // Write to a output Staff csv file (No Password Encryption)
     ///////////////////////////////////////////////////////////////////////////////
     public static void outputStaffCSV() {

@@ -1,6 +1,11 @@
 package database;
 
+import translation.Staff;
+import translation.ServiceRequest;
+import Node.Node;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class serviceDatabase {
 
@@ -66,9 +71,7 @@ public class serviceDatabase {
                     "staffID VARCHAR(50)," +
                     "severity VARCHAR(4)," +
                     "comments VARCHAR(75)," +
-                    "CONSTRAINT serviceRequests_PK PRIMARY KEY (requestID)," +
-                    "CONSTRAINT serviceRequests_FK1 FOREIGN KEY (locationID) REFERENCES nodes(nodeID)," +
-                    "CONSTRAINT serviceRequests_FK2 FOREIGN KEY (staffID) REFERENCES hospitalStaff(staffID))");
+                    "CONSTRAINT serviceRequests_PK PRIMARY KEY (requestID))");
 
             int rsetCreate1 = stmtCreate.executeUpdate(createServiceTable);
             System.out.println("Create serviceRequests table Successful!");
@@ -83,4 +86,126 @@ public class serviceDatabase {
             e.printStackTrace();
         }
     }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Add a Service
+    ///////////////////////////////////////////////////////////////////////////////
+    public static void addService(ServiceRequest anyService) {
+
+        try {
+            conn = DriverManager.getConnection(JDBC_URL_API);
+            conn.setAutoCommit(false);
+            conn.getMetaData();
+
+            PreparedStatement addAnyService = conn.prepareStatement("INSERT INTO serviceRequests VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+            addAnyService.setInt(1, anyService.getRequestID());
+            addAnyService.setString(2, anyService.getLocation().getID());
+            addAnyService.setString(3, anyService.getTime());
+            addAnyService.setString(4, anyService.getDate());
+            addAnyService.setInt(5, anyService.getAssignedPersonnel().getID());
+            addAnyService.setString(6, anyService.getSeverity());
+            addAnyService.setString(7, anyService.getInputData());
+
+            addAnyService.executeUpdate();
+
+            //System.out.printf("Insert Staff Successful for staffID: %-5d\n", anyService.getRequestID());
+            //System.out.println();
+
+            conn.commit();
+
+            addAnyService.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();// end try
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Delete a staff member from the staff table
+    ///////////////////////////////////////////////////////////////////////////////
+    public static void deleteService(ServiceRequest anyRequest){
+
+        int anyServiceID = anyRequest.getRequestID();
+
+        try  {
+            conn = DriverManager.getConnection(JDBC_URL_API);
+            conn.setAutoCommit(false);
+            conn.getMetaData();
+
+            PreparedStatement deleteAnyService = conn.prepareStatement("DELETE FROM serviceRequests WHERE requestID = ?");
+
+            // set the corresponding param
+            deleteAnyService.setInt(1, anyServiceID);
+            // execute the delete statement
+            deleteAnyService.executeUpdate();
+
+            System.out.println("Delete Service Request Successful!");
+
+            conn.commit();
+            deleteAnyService.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Get all staff members from the staff table
+    ///////////////////////////////////////////////////////////////////////////////
+    public static ArrayList<ServiceRequest> queryAllStaff() {
+
+        ArrayList<ServiceRequest> resultServices = new ArrayList<>();
+
+        try {
+            conn = DriverManager.getConnection(JDBC_URL_API);
+            conn.setAutoCommit(false);
+            conn.getMetaData();
+
+            Statement selectAllServices = conn.createStatement();
+            String allServices = "SELECT * FROM serviceRequests";
+            ResultSet rsetAllServices = selectAllServices.executeQuery(allServices);
+
+            Integer intServiceID;
+            String strLocID;
+            String strTime;
+            String strDate;
+            String strStaffID;
+            String strSeverity;
+            String strComments;
+
+            //Process the results
+            while (rsetAllServices.next()) {
+                intServiceID = rsetAllServices.getInt("requestID");
+                strLocID = rsetAllServices.getString("locationID");
+                strTime = rsetAllServices.getString("time");
+                strDate = rsetAllServices.getString("date");
+                strStaffID = rsetAllServices.getString("staffID");
+                strSeverity = rsetAllServices.getString("severity");
+                strComments = rsetAllServices.getString("comments");
+
+                Node someNode = nodeDatabase.findANode(strLocID);
+                Staff someStaff = staffDatabase.findAStaff(strStaffID);
+
+                resultServices.add(new ServiceRequest(intServiceID, someNode, strTime, strDate, someStaff, strSeverity, strComments));
+
+            } // End While
+
+            conn.commit();
+            System.out.println();
+
+            rsetAllServices.close();
+            selectAllServices.close();
+            conn.close();
+
+        } // end try
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultServices;
+    }
+
+
 }

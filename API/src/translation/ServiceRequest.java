@@ -60,13 +60,17 @@ public class ServiceRequest{
     public Staff getAssignedPersonnel() {
         return assignedPersonnel;
     }
-
     public String getInputData() {
         return inputData;
     }
-
     public void setInputData(String inputData) {
         this.inputData = inputData;
+    }
+    public String getSeverity() {
+        return severity;
+    }
+    public void setSeverity(String severity) {
+        this.severity = severity;
     }
 
     @Override
