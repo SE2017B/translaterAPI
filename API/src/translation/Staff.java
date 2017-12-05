@@ -23,7 +23,7 @@ public class Staff{
     private int ID;
 
     //Constructor DB uses
-    public Staff(String username, String password, String jobTitle, String fullName, int ID, int admin){
+    public Staff(String username, String password, String jobTitle, String fullName, int ID){
         this.username = username;
         this.password = password;
         this.jobTitle = jobTitle;

@@ -1,6 +1,7 @@
 package api;
 
 import database.nodeDatabase;
+import database.staffDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +29,10 @@ public class Main extends Application {
         }
 
         nodeDatabase.deleteNodeTable();
+        staffDatabase.deleteStaffTable();
+
         nodeDatabase.createNodeTable();
+        staffDatabase.createStaffTable();
 
         nodeDatabase.readNodeCSV("API/src/csv/MapAnodes.csv");
         nodeDatabase.readNodeCSV("API/src/csv/MapBnodes.csv");
@@ -40,10 +44,12 @@ public class Main extends Application {
         nodeDatabase.readNodeCSV("API/src/csv/MapHnodes.csv");
         nodeDatabase.readNodeCSV("API/src/csv/MapInodes.csv");
         nodeDatabase.readNodeCSV("API/src/csv/MapWnodes.csv");
-
         nodeDatabase.insertNodesFromCSV();
 
+        staffDatabase.readStaffCSV("API/src/csv/staffMembers.csv");
+
         System.out.println("Node =" + nodeDatabase.findANode("IREST00203"));
+        System.out.println("Staff = " + staffDatabase.queryAllStaff());
 
         launch(args);
 
