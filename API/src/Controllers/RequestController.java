@@ -267,7 +267,7 @@ public class RequestController
     public void displayFields()
     {
         //todo show on list based on the satff memeber
-        //resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.));
+        resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.findStaffMemRequests(staffChoiceBox.getSelectionModel().getSelectedItem())));
     }
 
     @FXML
