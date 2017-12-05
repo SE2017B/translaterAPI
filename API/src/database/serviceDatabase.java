@@ -64,11 +64,10 @@ public class serviceDatabase {
                     "time VARCHAR(50)," +
                     "date VARCHAR(50)," +
                     "staffID VARCHAR(50)," +
-                    "nodeType VARCHAR(4)," +
-                    "longName VARCHAR(75)," +
-                    "shortName VARCHAR(50)," +
-                    "teamAssigned VARCHAR(6)," +
-                    "CONSTRAINT nodes_PK PRIMARY KEY (nodeID))");
+                    "severity VARCHAR(4)," +
+                    "comments VARCHAR(75)," +
+                    "CONSTRAINT serviceRequests_PK PRIMARY KEY (requestID)," +
+                    "CONSTRAINT serviceRequests_FK1 FOREIGN KEY (locationID) REFERENCES nodes(nodeID))");
 
             int rsetCreate1 = stmtCreate.executeUpdate(createServiceTable);
             System.out.println("Create serviceRequests table Successful!");

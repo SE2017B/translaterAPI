@@ -161,7 +161,6 @@ public class nodeDatabase {
                 insertNode.setString(9, nodeDatabase.allNodes.get(j).getTeam());
 
                 insertNode.executeUpdate();
-                System.out.printf("%-5d: Insert Node Successful!\n",(j+1));
             }
 
             conn.commit();
@@ -200,7 +199,6 @@ public class nodeDatabase {
                         nodeDatabase.allNodes.get(j).getShortName()+ "," +
                         nodeDatabase.allNodes.get(j).getTeam()
                 );
-                System.out.printf("%-5d: Node Record Saved!\n", j);
             }
             System.out.println();
             pw1.flush();
