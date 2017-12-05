@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        SampleService.newInstance(primaryStage).run(100, 100, 500, 500, null, null, null);
+        SampleService.newInstance(primaryStage).run(100, 100, 500, 500, null, "DHALL02802", null);
     }
 
 

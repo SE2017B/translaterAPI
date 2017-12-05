@@ -23,6 +23,7 @@ public class SampleService implements ExportableServiceComponent {
         SampleServicePreconditions.verifyWindowDimensions(windowLength, windowWidth);
         // TODO: Run other precondition checks here
         // All checks passed; spawn the window
+
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
         RequestController.setLocation(destNodeID);
         System.out.println("СУКА БЛЯ");

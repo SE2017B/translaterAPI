@@ -91,12 +91,11 @@ public class Staff{
     return fullName + " : " + username;
     }
 
-    public void updateCredidentials(String username, String password, String jobTitle, String fullName, int id) {
+    public void updateCredidentials(String username, String password, String jobTitle, String fullName) {
         this.username = username;
         this.password = password;
         this.jobTitle = jobTitle;
         this.fullName = fullName;
-        this.ID = id;
         staffDatabase.modifyStaff(this);
     }
 
