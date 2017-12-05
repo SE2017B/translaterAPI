@@ -186,6 +186,7 @@ public class RequestController
         //todo check for label set up -> RESOLVE SERVICE
 
 
+        staffResolveServiceChoiceBox.valueProperty().addListener( (v, oldValue, newValue) -> displayFields());
         staffListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Staff>() {
             @Override
             public void changed(ObservableValue<? extends Staff> observable, Staff oldValue, Staff newValue){
@@ -251,6 +252,11 @@ public class RequestController
     public static void setLocation(String locID){
         Node loc = nodeDatabase.findANode(locID);
         location = loc;
+    }
+
+    public void displayFields()
+    {
+        //resolveServiceListView
     }
 
     @FXML
