@@ -22,18 +22,18 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #005697;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RequestController">
     <children>
         <GridPane layoutX="456.0" layoutY="303.0" prefHeight="800.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.0" minWidth="10.0" prefWidth="158.39999999999998" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="996.7999755859377" minWidth="10.0" prefWidth="949.6000244140627" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="169.9999755859376" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.0" minWidth="100.0" prefWidth="111.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="996.7999755859377" minWidth="10.0" prefWidth="603.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="100.0" prefWidth="104.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="170.0" minHeight="10.0" prefHeight="60.60000228881836" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="656.8000244140625" minHeight="10.0" prefHeight="656.8000244140625" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="73.79997558593755" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="170.0" minHeight="35.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="656.8000244140625" minHeight="10.0" prefHeight="524.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="261.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label text="Sanitation Service" GridPane.columnIndex="1" GridPane.halignment="CENTER">
@@ -242,9 +242,9 @@
                                                     <content>
                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                             <children>
-                                                                <SplitPane dividerPositions="0.28499843407453807" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                <SplitPane dividerPositions="0.3996655518394649" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <items>
-                                                                        <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #008faa;">
+                                                                        <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                             <children>
                                                                                 <GridPane prefHeight="560.8" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                     <columnConstraints>
@@ -299,9 +299,9 @@
                                                             <children>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <children>
-                                                                        <SplitPane dividerPositions="0.28499843407453807" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                        <SplitPane dividerPositions="0.40301003344481606" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                             <items>
-                                                                                <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #008faa;">
+                                                                                <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                     <children>
                                                                                         <GridPane prefHeight="560.8" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                             <columnConstraints>
@@ -329,7 +329,7 @@
                                                                                                         <Insets left="20.0" right="20.0" />
                                                                                                     </GridPane.margin>
                                                                                                 </JFXButton>
-                                                                                                <Label text="Select Staff to Delete" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+                                                                                                <Label text="Select Staff to Edit" GridPane.columnSpan="2" GridPane.halignment="CENTER">
                                                                                                     <font>
                                                                                                         <Font size="24.0" />
                                                                                                     </font>
