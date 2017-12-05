@@ -55,4 +55,5 @@ public class SampleService implements ExportableServiceComponent {
     public static SampleService newInstance(final Stage primaryStage) {
         return new SampleService(primaryStage);
     }
+
 }
