@@ -9,6 +9,8 @@
 package translation;
 
 
+import database.staffDatabase;
+
 import java.util.*;
 
 public class Staff{
@@ -95,6 +97,7 @@ public class Staff{
         this.jobTitle = jobTitle;
         this.fullName = fullName;
         this.ID = id;
+        staffDatabase.modifyStaff(this);
     }
 
     public void addRequest(ServiceRequest newRequest){
@@ -112,4 +115,7 @@ public class Staff{
         Staff other = (Staff)obj;
         return this.getUsername().equals(other.getUsername());
     }
+
+
+
 }
