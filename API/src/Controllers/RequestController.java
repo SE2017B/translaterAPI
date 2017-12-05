@@ -30,14 +30,17 @@ public class RequestController
         private String time;
         private Staff staffMember;
         private String date;
+        private String comments;
+        private String severity;
         private String nameServiceFile;
         private String nameDept;
         private String nameService;
         private String nameStaff;
         private String selectedAlg;
+        private static Node location;
         private int requestIDCount;
         private ArrayList<String> deps;
-        //private ArrayList<Service> serv;
+        private ArrayList<String> tasksList;
         //private DepartmentSubsystem depSub;
         //private Service servSelect;
         private ServiceRequest reqServPls;
@@ -154,7 +157,13 @@ public class RequestController
 
     public void init()
     {
-
+            tasksList = new ArrayList<String>();
+            tasksList.add("Clean Room");
+            tasksList.add("Room Prep");
+            tasksList.add("Clean Up Hazardous Waste");
+            tasksList.add("Clean Up Non-Hazardous Waste");
+            tasksList.add("Repair");
+            tasksList.add("");
 //        choiceBoxDept.valueProperty().addListener( (v, oldValue, newValue) -> deptSelected(newValue));
 //        choiceBoxService.valueProperty().addListener( (v, oldValue, newValue) -> servSelected(newValue));
 //        choiceBoxStaff.valueProperty().addListener( (v, oldValue, newValue) -> staffSelected(newValue));
@@ -215,26 +224,30 @@ public class RequestController
 
     }
 
+    public static void setLocation(String locID){
+        Node loc = nodeDatabase.findANode(locID);
+        location = loc;
+    }
+
     @FXML
     public void requestCreatePressed(ActionEvent e)
     {
         //todo create the request
         requestIDCount++;
 
-//
+
+        staffMember = staffChoiceBox.getSelectionModel().getSelectedItem();
+        comments = txtAreaComments.getText();
+        ServiceRequest serv;
+        serv = new ServiceRequest(requestIDCount, location, time, date, staffMember, severity, comments);
 //        //Submit request
 //        //depSub.submitRequest(choiceBoxService.getValue(), timeMenu.getValue().toString(), dateMenu.getValue().toString() , locationChoiceBox.getValue(), choiceBoxStaff.getValue(),requestIDCount, false, "EMAIL");
 //
 //        //ServiceRequest nReq = new ServiceRequest(choiceBoxService.getValue(), requestIDCount, locationChoiceBox.getValue(), timeMenu.getValue().toString(), dateMenu.getValue().toString(), choiceBoxStaff.getValue());
 //
-//        //Add new service to List
-//        System.out.println("request submitted");
-//        nReq.setInputData(currentServiceController.getInputData());
-//        resolveServiceListView.getItems().add(nReq);
-//        //fillInServiceSpecificRecs();
-
-        
-
+        //Add new service to List
+        System.out.println("request submitted");
+        resolveServiceListView.getItems().add(serv);
     }
 
     public void cancelPressed(ActionEvent e)
@@ -249,8 +262,9 @@ public class RequestController
         dateMenu.getEditor().clear();
 //
         txtAreaComments.clear();
+        //severityMenu.;
 
-        System.out.println("cancle pressed");
+        System.out.println("cancel pressed");
 
     }
 
@@ -271,11 +285,12 @@ public class RequestController
     {
 //
         //todo ADJUST FOR API
-//        String tempUsername = usernameTxt.getText();
-//        String tempPassword = passwordTxt.getText();
-//        String tempJobTitle = jobTitletxt.getText();
-//        String tempFullName = fullNametxt.getText();
-//        Service tempService = addStaffServiceChoiceBox.getValue();
+        String tempUsername = usernameTxt.getText();
+        String tempPassword = passwordTxt.getText();
+        String tempFullName = fullNametxt.getText();
+
+        System.out.println(usernameTxt.getText() + " " + passwordTxt.getText() + " " + fullNametxt.getText());
+        //Service tempService = addStaffServiceChoiceBox.getValue();
 //
 //
 //        staffDatabase.incStaffCounter();
@@ -306,10 +321,12 @@ public class RequestController
     }
 
     @FXML
-    void severitySelected(ActionEvent event)
+    void severitySelected(ActionEvent e)
     {
-
     //todo ADJUST FOR API
+        severity = ((MenuItem) e.getSource()).getText();
+        severityMenu.setText(severity);
+
     }
 
     @FXML

@@ -1,5 +1,6 @@
 package api;
 
+import Controllers.RequestController;
 import api.exceptions.ServiceException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +22,8 @@ public class SampleService implements ExportableServiceComponent {
         // TODO: Run other precondition checks here
         // All checks passed; spawn the window
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
+        RequestController.setLocation(destNodeID);
+        System.out.println("СУКА БЛЯ");
     }
 
     private void showServiceWindow(final int xcoord, final int ycoord, final int windowWidth, final int windowLength) {
