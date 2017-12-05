@@ -15,7 +15,7 @@ public class staffDatabase {
     // hospitalStaff (username U1, password, jobType, fullName, ID PK)
     //////////////////////////////////////////////////////////////////
 
-    private static final String JDBC_URL_STAFF="jdbc:derby:hospitalStaffDB;create=true";
+    private static final String JDBC_URL_STAFF="jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     // Staff Primary Key Counter
@@ -81,7 +81,7 @@ public class staffDatabase {
                     "ID INTEGER," +
                     "CONSTRAINT hospitalStaff_PK PRIMARY KEY (ID)," +
                     "CONSTRAINT hospitalStaff_U1 UNIQUE (username)," +
-                    "CONSTRAINT jobTitle CHECK (jobTitle IN ('Translator', 'Janitor', 'Chef', 'Food Delivery', 'Transport Staff'))," +
+                    "CONSTRAINT jobTitle CHECK (jobTitle IN ('Translator', 'Janitor', 'Chef', 'Food Delivery', 'Transport Staff', 'Sanitation'))," +
                     "CONSTRAINT ID_chk CHECK (ID > 0))");
 
             int rsetCreate3 = stmtCreateStaffTable.executeUpdate(createStaffTable);
@@ -120,7 +120,6 @@ public class staffDatabase {
                 insertStaff.executeUpdate();
 
                 staffCounter++;
-                System.out.printf("%-5d: Insert Staff Successful!\n",(j+1));
             }
 
             conn.commit();
@@ -332,7 +331,6 @@ public class staffDatabase {
                         staffDatabase.allStaff.get(j).getFullName() + "," +
                         staffDatabase.allStaff.get(j).getID()
                 );
-                System.out.printf("%-5d: Staff Record Saved!\n", j);
             }
             System.out.println();
             pw3.flush();

@@ -10,7 +10,7 @@ public class serviceDatabase {
     //        longName, shortName, teamAssigned)
     //////////////////////////////////////////////////////////////////
 
-    private static final String JDBC_URL_STAFF="jdbc:derby:hospitalStaffDB;create=true";
+    private static final String JDBC_URL_API="jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,7 @@ public class serviceDatabase {
 
         try {
 
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
@@ -50,7 +50,7 @@ public class serviceDatabase {
         System.out.println();
 
         try {
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
@@ -60,14 +60,15 @@ public class serviceDatabase {
             Statement stmtCreate = conn.createStatement();
             String createServiceTable = ("CREATE TABLE serviceRequests" +
                     "(requestID INTEGER," +
-                    "locationID VARCHAR(5)," +
+                    "locationID VARCHAR(10)," +
                     "time VARCHAR(50)," +
                     "date VARCHAR(50)," +
                     "staffID VARCHAR(50)," +
                     "severity VARCHAR(4)," +
                     "comments VARCHAR(75)," +
                     "CONSTRAINT serviceRequests_PK PRIMARY KEY (requestID)," +
-                    "CONSTRAINT serviceRequests_FK1 FOREIGN KEY (locationID) REFERENCES nodes(nodeID))");
+                    "CONSTRAINT serviceRequests_FK1 FOREIGN KEY (locationID) REFERENCES nodes(nodeID)," +
+                    "CONSTRAINT serviceRequests_FK2 FOREIGN KEY (staffID) REFERENCES hospitalStaff(staffID))");
 
             int rsetCreate1 = stmtCreate.executeUpdate(createServiceTable);
             System.out.println("Create serviceRequests table Successful!");

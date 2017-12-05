@@ -1,6 +1,7 @@
 package api;
 
 import database.nodeDatabase;
+import database.serviceDatabase;
 import database.staffDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,11 +29,13 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
+        serviceDatabase.deleteRequestsTable();
         nodeDatabase.deleteNodeTable();
         staffDatabase.deleteStaffTable();
 
         nodeDatabase.createNodeTable();
         staffDatabase.createStaffTable();
+        serviceDatabase.createServiceTable();
 
         nodeDatabase.readNodeCSV("API/src/csv/MapAnodes.csv");
         nodeDatabase.readNodeCSV("API/src/csv/MapBnodes.csv");
