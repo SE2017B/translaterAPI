@@ -69,7 +69,7 @@ public class serviceDatabase {
                     "time VARCHAR(50)," +
                     "date VARCHAR(50)," +
                     "staffID VARCHAR(50)," +
-                    "severity VARCHAR(4)," +
+                    "severity VARCHAR(10)," +
                     "comments VARCHAR(75)," +
                     "CONSTRAINT serviceRequests_PK PRIMARY KEY (requestID))");
 

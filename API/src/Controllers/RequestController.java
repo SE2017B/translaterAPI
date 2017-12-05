@@ -48,6 +48,7 @@ public class RequestController
         //private Service servSelect;
         private ServiceRequest reqServPls;
         //private CurrentServiceController currentServiceController;
+        private ArrayList<Staff> staffForCB = new ArrayList<Staff>();
 
         @FXML
         private JFXButton btncreate;
@@ -170,6 +171,7 @@ public class RequestController
     @FXML
     public void initialize()
     {
+            staffForCB.addAll(staffDatabase.queryAllStaff());
             tasksList = new ArrayList<String>();
             tasksList.add("Clean Room");
             tasksList.add("Room Prep");
@@ -190,8 +192,10 @@ public class RequestController
         staffListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Staff>() {
             @Override
             public void changed(ObservableValue<? extends Staff> observable, Staff oldValue, Staff newValue){
-                removeFullName.setText(newValue.getFullName());
-                removeUsername.setText(newValue.getUsername());
+                if(newValue != null) {
+                    removeFullName.setText(newValue.getFullName());
+                    removeUsername.setText(newValue.getUsername());
+                }
             }
         }
         );
@@ -199,15 +203,18 @@ public class RequestController
         staffListView1.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Staff>() {
             @Override
             public void changed(ObservableValue<? extends Staff> observable, Staff oldValue, Staff newValue){
-                fullnameEdit.setText(newValue.getFullName());
-                usernameEdit.setText(newValue.getUsername());
-                passwordEdit.setText(newValue.getPassword());
+                if(newValue != null) {
+                    fullnameEdit.setText(newValue.getFullName());
+                    usernameEdit.setText(newValue.getUsername());
+                    passwordEdit.setText(newValue.getPassword());
+                }
             }
         }
         );
-        staffListView.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
-        staffListView1.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
-        staffResolveServiceChoiceBox.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
+        staffListView.setItems(FXCollections.observableList(staffForCB));
+        staffListView1.setItems(FXCollections.observableList(staffForCB));
+        staffResolveServiceChoiceBox.setItems(FXCollections.observableList(staffForCB));
+        //resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.queryAllServices()));
 
         onShow();
     }
@@ -216,8 +223,8 @@ public class RequestController
     {
         // todo check population of request list upon start
         //staff choice box set up
-        ArrayList<Staff> staffForCB = new ArrayList<Staff>();
-        staffForCB.addAll(staffDatabase.queryAllStaff());
+
+
         staffChoiceBox.getItems().addAll(staffForCB);
 
         //todo when tasks made finish this
@@ -252,32 +259,28 @@ public class RequestController
     public static void setLocation(String locID){
         Node loc = nodeDatabase.findANode(locID);
         location = loc;
+        if(location == null){
+            System.out.println("double fuck me");
+        }
     }
 
     public void displayFields()
     {
-        //resolveServiceListView
+        //todo show on list based on the satff memeber
+        //resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.));
     }
 
     @FXML
     public void requestCreatePressed(ActionEvent e)
     {
-        //todo create the request
         requestIDCount++;
-
-
         staffMember = staffChoiceBox.getSelectionModel().getSelectedItem();
         comments = txtAreaComments.getText();
         ServiceRequest serv;
         serv = new ServiceRequest(requestIDCount, location, time, date, staffMember, severity, comments);
-       // serviceDatabase.addService(requestIDCount, location, time, date, staffMember, severity, comments);
-//
-//Submit request
-//        //depSub.submitRequest(choiceBoxService.getValue(), timeMenu.getValue().toString(), dateMenu.getValue().toString() , locationChoiceBox.getValue(), choiceBoxStaff.getValue(),requestIDCount, false, "EMAIL");
-//
-//        //ServiceRequest nReq = new ServiceRequest(choiceBoxService.getValue(), requestIDCount, locationChoiceBox.getValue(), timeMenu.getValue().toString(), dateMenu.getValue().toString(), choiceBoxStaff.getValue());
-//
-        //Add new service to List
+        serviceDatabase.addService(serv);
+        resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.queryAllServices()));
+
         System.out.println("request submitted");
 
     }
@@ -315,19 +318,29 @@ public class RequestController
     {
 //
         //todo ADJUST FOR API
-        String tempUsername = usernameTxt.getText();
-        String tempPassword = passwordTxt.getText();
-        String tempFullName = fullNametxt.getText();
         staffId = staffDatabase.getStaffCounter() + 10;
 
+        ArrayList<Staff> tempAL = new ArrayList<>(staffForCB);
 
         System.out.println(usernameTxt.getText() + " " + passwordTxt.getText() + " " + fullNametxt.getText());
         //Service tempService = addStaffServiceChoiceBox.getValue();
         Staff nStaff;
         //todo how to make new staff and send it out
         nStaff = new Staff(usernameTxt.getText(), passwordTxt.getText(),"Sanitation", fullNametxt.getText(), staffId);
+        tempAL.add(nStaff);
         staffDatabase.addStaff(nStaff);
-        staffListView.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
+        staffResolveServiceChoiceBox.getItems().clear();
+        staffListView1.getItems().clear();
+        staffListView.getItems().clear();
+        //staffListView.setItems(FXCollections.observableList(staffForCB));
+        staffChoiceBox.getItems().clear();
+
+        staffResolveServiceChoiceBox.setItems(FXCollections.observableList(tempAL));
+        staffListView1.setItems(FXCollections.observableList(tempAL));
+        staffListView.setItems(FXCollections.observableList(tempAL));
+        //staffListView.setItems(FXCollections.observableList(staffForCB));
+        staffChoiceBox.setItems(FXCollections.observableList(tempAL));
+        staffForCB.addAll(tempAL);
 //
 //
 //        staffDatabase.incStaffCounter();
@@ -339,10 +352,32 @@ public class RequestController
     @FXML
     void removeStaffPressed(ActionEvent event)
     {
-        //todo ADJUST FOR API
-        staffDatabase.deleteStaff(staffListView.getSelectionModel().getSelectedItem());
-        staffListView.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
 
+        ArrayList<Staff> tempAL = new ArrayList<>(staffForCB);
+        //todo ADJUST FOR API
+        if(tempAL.remove(staffListView.getSelectionModel().getSelectedItem())){
+            System.out.println("cant find the node");
+        }
+
+        staffDatabase.deleteStaff(staffListView.getSelectionModel().getSelectedItem());
+
+
+        staffResolveServiceChoiceBox.getItems().clear();
+        staffListView1.getItems().clear();
+        staffListView.getItems().clear();
+        //staffListView.setItems(FXCollections.observableList(staffForCB));
+        staffChoiceBox.getItems().clear();
+
+
+        //staffListView.setItems(FXCollections.observableList(staffForCB));
+        staffListView.setItems(FXCollections.observableList(tempAL));
+        staffListView1.setItems(FXCollections.observableList(tempAL));
+        staffChoiceBox.setItems(FXCollections.observableList(tempAL));
+        staffResolveServiceChoiceBox.setItems(FXCollections.observableList(tempAL));
+        if(staffForCB.isEmpty()) {
+            System.out.println("life is good");
+            staffForCB.addAll(tempAL);
+        }
 //        depSub.deleteStaff(tempService, tempUsername);
 //
 //        staffListView.setItems(FXCollections.observableList(staffDatabase.getStaff()));
@@ -369,9 +404,29 @@ public class RequestController
     @FXML
     void editStaffPressed(ActionEvent event)
     {
-    //todo ADJUST FOR API
+        ArrayList<Staff> tempAL = new ArrayList<>(staffForCB);
 
-}
+        String tempUsername = usernameEdit.getText();
+        String tempPassword = passwordEdit.getText();
+        String tempFullName = fullnameEdit.getText();
+
+        Staff tempStaff = staffListView1.getSelectionModel().getSelectedItem();
+        tempStaff.updateCredidentials(tempUsername,tempPassword,"Sanitation", tempFullName);
+
+        staffResolveServiceChoiceBox.getItems().clear();
+        staffListView1.getItems().clear();
+        staffListView.getItems().clear();
+        //staffListView.setItems(FXCollections.observableList(staffForCB));
+        staffChoiceBox.getItems().clear();
+        if(staffForCB.isEmpty() || staffForCB == null){
+            System.out.println("double fuck me");
+        }
+        staffListView.setItems(FXCollections.observableList(tempAL));
+        staffListView1.setItems(FXCollections.observableList(tempAL));
+        staffChoiceBox.setItems(FXCollections.observableList(tempAL));
+        staffResolveServiceChoiceBox.setItems(FXCollections.observableList(tempAL));
+        staffForCB.addAll(tempAL);
+    }
 
     @FXML
     void logoutPressed(ActionEvent event)

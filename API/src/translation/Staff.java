@@ -9,6 +9,8 @@
 package translation;
 
 
+import database.staffDatabase;
+
 import java.util.*;
 
 public class Staff{
@@ -89,12 +91,12 @@ public class Staff{
     return fullName + " : " + username;
     }
 
-    public void updateCredidentials(String username, String password, String jobTitle, String fullName, int id) {
+    public void updateCredidentials(String username, String password, String jobTitle, String fullName) {
         this.username = username;
         this.password = password;
         this.jobTitle = jobTitle;
         this.fullName = fullName;
-        this.ID = id;
+        staffDatabase.modifyStaff(this);
     }
 
     public void addRequest(ServiceRequest newRequest){
@@ -110,6 +112,9 @@ public class Staff{
         if(obj == null) return false;
         if(!(obj instanceof Staff)) return false;
         Staff other = (Staff)obj;
-        return this.getUsername().equals(other.getUsername());
+        return this.getID() == (other.getID());
     }
+
+
+
 }

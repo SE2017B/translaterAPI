@@ -324,7 +324,7 @@
                                                                                                         <Font size="24.0" />
                                                                                                     </font>
                                                                                                 </JFXTextField>
-                                                                                                <JFXButton fx:id="editStaff" onAction="#editStaffPressed" prefHeight="50.0" prefWidth="150.0" text="Remove Staff" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                                                                                                <JFXButton fx:id="editStaff" onAction="#editStaffPressed" prefHeight="50.0" prefWidth="150.0" text="Edit Staff" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                                                                                                     <GridPane.margin>
                                                                                                         <Insets left="20.0" right="20.0" />
                                                                                                     </GridPane.margin>
