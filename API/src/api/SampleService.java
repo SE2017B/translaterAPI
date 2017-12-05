@@ -2,6 +2,7 @@ package api;
 
 import Controllers.RequestController;
 import api.exceptions.ServiceException;
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -47,9 +48,12 @@ public class SampleService implements ExportableServiceComponent {
         System.out.println("5");
         primaryStage.show();
         System.out.println("6");
+//        RequestController.onShow();
+//        RequestController.init();
     }
 
     public static SampleService newInstance(final Stage primaryStage) {
         return new SampleService(primaryStage);
     }
+
 }

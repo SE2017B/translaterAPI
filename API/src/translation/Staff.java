@@ -86,7 +86,7 @@ public class Staff{
     }
 
     public String toString(){
-        return fullName;
+    return fullName + " : " + username;
     }
 
     public void updateCredidentials(String username, String password, String jobTitle, String fullName, int id) {

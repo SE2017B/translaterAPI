@@ -8,6 +8,8 @@
 package Controllers;
 
 import com.jfoenix.controls.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +39,7 @@ public class RequestController
         private String nameService;
         private String nameStaff;
         private String selectedAlg;
+        private int staffId;
         private static Node location;
         private int requestIDCount;
         private ArrayList<String> deps;
@@ -153,6 +156,11 @@ public class RequestController
 
         @FXML
         private JFXButton btnEditMap;
+        @FXML
+        private Label removeUsername;
+
+        @FXML
+        private Label removeFullName;
 
 
     public void init()
@@ -163,7 +171,7 @@ public class RequestController
             tasksList.add("Clean Up Hazardous Waste");
             tasksList.add("Clean Up Non-Hazardous Waste");
             tasksList.add("Repair");
-            tasksList.add("");
+            tasksList.add("Other");
 //        choiceBoxDept.valueProperty().addListener( (v, oldValue, newValue) -> deptSelected(newValue));
 //        choiceBoxService.valueProperty().addListener( (v, oldValue, newValue) -> servSelected(newValue));
 //        choiceBoxStaff.valueProperty().addListener( (v, oldValue, newValue) -> staffSelected(newValue));
@@ -171,20 +179,16 @@ public class RequestController
 
         //Display selected request on label
         //todo check for label set up -> RESOLVE SERVICE
-//        resolveServiceListView.getSelectionModel().selectedItemProperty().addListener(
-//                new ChangeListener<ServiceRequest>() {
-//                    @Override
-//                    public void changed(ObservableValue<? extends ServiceRequest> observable,
-//                                        ServiceRequest oldValue, ServiceRequest newValue) {
-//
-//                        lblSelectedService.setText(newValue.getService().toString());
-//                        lblSelectedAdditionalInfo.setText(newValue.getInputData());
-//                        lblSelectedDT.setText(newValue.getTime());
-//                        lblSelectedLocation.setText(newValue.getLocation().toString());
-//
-//                    }
-//                }
-//        );
+
+
+        staffListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Staff>() {
+            @Override
+            public void changed(ObservableValue<? extends Staff> observable, Staff oldValue, Staff newValue){
+                removeFullName.setText(newValue.getFullName());
+                removeFullName.setText(newValue.getUsername());
+            }
+        }
+        );
     }
 
     public void onShow()
@@ -197,7 +201,7 @@ public class RequestController
 
         //todo when tasks made finish this
         //taskChoiceBox set up
-        taskChoiceBox.getItems().addAll();
+        taskChoiceBox.getItems().addAll(tasksList);
 //        System.out.println(depSub.getCurrentLoggedIn().getAllRequest());
 //        if(depSub.getCurrentLoggedIn().getAllRequest().isEmpty())
 //        {
@@ -257,12 +261,10 @@ public class RequestController
 //        languageChoiceBox.setValue(null);
 //
         //severityMenu = ((MenuItem) e.getSource()).getText().toString();
-//
         timeMenu.getEditor().clear();
         dateMenu.getEditor().clear();
-//
         txtAreaComments.clear();
-        //severityMenu.;
+
 
         System.out.println("cancel pressed");
 
@@ -288,9 +290,16 @@ public class RequestController
         String tempUsername = usernameTxt.getText();
         String tempPassword = passwordTxt.getText();
         String tempFullName = fullNametxt.getText();
+        staffId = staffDatabase.getStaffCounter();
+
 
         System.out.println(usernameTxt.getText() + " " + passwordTxt.getText() + " " + fullNametxt.getText());
         //Service tempService = addStaffServiceChoiceBox.getValue();
+        Staff nStaff;
+        //todo how to make new staff and send it out
+        nStaff = new Staff(usernameTxt.getText(), passwordTxt.getText(),"Sanitation", fullNametxt.getText(), staffId);
+        staffDatabase.addStaff(nStaff);
+        staffListView.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
 //
 //
 //        staffDatabase.incStaffCounter();
@@ -303,9 +312,11 @@ public class RequestController
     void removeStaffPressed(ActionEvent event)
     {
         //todo ADJUST FOR API
-//        String tempUsername = usernameDeleteTxt.getText();
-//        Service tempService = staffJobTypeChoiceBox.getValue();
-//
+        String tempUsername = usernameDeleteTxt.getText();
+        String tempFullName = textFullName.getText();
+        staffDatabase.deleteStaff(staffListView.getSelectionModel().getSelectedItem());
+        staffListView.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
+
 //        depSub.deleteStaff(tempService, tempUsername);
 //
 //        staffListView.setItems(FXCollections.observableList(staffDatabase.getStaff()));
