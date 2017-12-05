@@ -35,7 +35,7 @@ public class Main extends Application {
 
         nodeDatabase.createNodeTable();
         staffDatabase.createStaffTable();
-        serviceDatabase.createServiceTable();
+//        serviceDatabase.createServiceTable();
 
         nodeDatabase.readNodeCSV("API/src/csv/MapAnodes.csv");
         nodeDatabase.readNodeCSV("API/src/csv/MapBnodes.csv");
