@@ -49,7 +49,8 @@ public class Main extends Application {
         nodeDatabase.readNodeCSV("API/src/csv/MapWnodes.csv");
         nodeDatabase.insertNodesFromCSV();
 
-        staffDatabase.readStaffCSV("API/src/csv/staffMembers.csv");
+        //void sd = new staffDatabase().readStaffCSV("API/src/csv/MapAnodes.csv");
+
         staffDatabase.insertStaffFromCSV();
 
         launch(args);

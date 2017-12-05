@@ -11,15 +11,14 @@ public class serviceDatabase {
 
     // Table Schema
     //////////////////////////////////////////////////////////////////
-    // serviceRequests (nodeID PK, xCoord, yCoord, floor, building, nodeType,
-    //        longName, shortName, teamAssigned)
+    // serviceRequests (requestID PK, locationID, time, date, staffID, severity, comments)
     //////////////////////////////////////////////////////////////////
 
     private static final String JDBC_URL_API="jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Delete nodes table
+    // Delete serviceRequests table
     ///////////////////////////////////////////////////////////////////////////////
     public static void deleteRequestsTable() {
 
@@ -48,7 +47,7 @@ public class serviceDatabase {
     }
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Create a table for the nodes
+    // Create a table for serviceRequests
     ///////////////////////////////////////////////////////////////////////////////
     public static void createServiceTable() {
 
@@ -123,7 +122,7 @@ public class serviceDatabase {
     }
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Delete a staff member from the staff table
+    // Delete a serviceRequest from the table
     ///////////////////////////////////////////////////////////////////////////////
     public static void deleteService(ServiceRequest anyRequest){
 

@@ -15,7 +15,7 @@ public class staffDatabase {
     // hospitalStaff (username U1, password, jobType, fullName, ID PK)
     //////////////////////////////////////////////////////////////////
 
-    private static final String JDBC_URL_STAFF="jdbc:derby:hospitalAPIDB;create=true";
+    private static final String JDBC_URL_API="jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     // Staff Primary Key Counter
@@ -37,7 +37,7 @@ public class staffDatabase {
 
         try {
 
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
@@ -65,7 +65,7 @@ public class staffDatabase {
     public static void createStaffTable() {
 
         try {
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
@@ -103,7 +103,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     public static void insertStaffFromCSV() {
         try {
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
 
@@ -141,7 +141,7 @@ public class staffDatabase {
         staffCounter++;
 
         try {
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
 
@@ -175,7 +175,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     public static void modifyStaff(Staff anyStaff) {
         try {
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
 
@@ -214,7 +214,7 @@ public class staffDatabase {
         int anyStaffID = anyStaff.getID();
 
         try  {
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
 
@@ -246,7 +246,7 @@ public class staffDatabase {
         ArrayList<Staff> resultStaff = new ArrayList<>();
 
         try {
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
 
@@ -287,37 +287,12 @@ public class staffDatabase {
     }
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Read from Staff CSV File and store columns in staff array lists
-    ///////////////////////////////////////////////////////////////////////////////
-    public static void readStaffCSV (String fname) {
-
-        File staffFile = new File(fname);
-
-        try {
-            Scanner inputStreamStaff = new Scanner(staffFile);
-            inputStreamStaff.nextLine();
-            while (inputStreamStaff.hasNext()) {
-
-                String staffData = inputStreamStaff.nextLine();
-                String[] staffValues = staffData.split(",");
-
-                staffDatabase.allStaff.add(new Staff(staffValues[0], staffValues[1], staffValues[2], staffValues[3], Integer.valueOf(staffValues[4])));
-
-            }
-            inputStreamStaff.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////
     // Query all nodes from the node table
     ///////////////////////////////////////////////////////////////////////////////
     public static Staff findAStaff(String anyStaffID) {
         Staff resultStaff = null;
         try {
-            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
 
@@ -360,6 +335,30 @@ public class staffDatabase {
             e.printStackTrace();
         }
         return resultStaff;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Read from Staff CSV File and store columns in staff array lists
+    ///////////////////////////////////////////////////////////////////////////////
+    public void readStaffCSV(String fname) {
+
+        InputStream in = getClass().getResourceAsStream("/" + fname);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+        try {
+            reader.readLine();
+            while (reader.readLine() != null) {
+
+                String[] staffValues = reader.readLine().split(",");
+
+                staffDatabase.allStaff.add(new Staff(staffValues[0], staffValues[1], staffValues[2], staffValues[3], Integer.valueOf(staffValues[4])));
+
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////////
