@@ -107,6 +107,9 @@ public class RequestController
         private JFXTextField fullNametxt;
 
         @FXML
+        private ChoiceBox<Staff> staffResolveServiceChoiceBox;
+
+        @FXML
         private JFXButton createStaffButton;
 
         @FXML
@@ -203,6 +206,7 @@ public class RequestController
         );
         staffListView.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
         staffListView1.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
+        staffResolveServiceChoiceBox.setItems(FXCollections.observableList(staffDatabase.queryAllStaff()));
 
         onShow();
     }
