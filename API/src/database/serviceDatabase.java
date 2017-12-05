@@ -155,7 +155,7 @@ public class serviceDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Get all staff members from the staff table
     ///////////////////////////////////////////////////////////////////////////////
-    public static ArrayList<ServiceRequest> queryAllStaff() {
+    public static ArrayList<ServiceRequest> queryAllServices() {
 
         ArrayList<ServiceRequest> resultServices = new ArrayList<>();
 

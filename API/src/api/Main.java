@@ -35,7 +35,7 @@ public class Main extends Application {
 
         nodeDatabase.createNodeTable();
         staffDatabase.createStaffTable();
-//        serviceDatabase.createServiceTable();
+        serviceDatabase.createServiceTable();
 
         nodeDatabase.readNodeCSV("API/src/csv/MapAnodes.csv");
         nodeDatabase.readNodeCSV("API/src/csv/MapBnodes.csv");
@@ -51,9 +51,6 @@ public class Main extends Application {
 
         staffDatabase.readStaffCSV("API/src/csv/staffMembers.csv");
         staffDatabase.insertStaffFromCSV();
-
-        nodeDatabase.findANode("IREST00203");
-        staffDatabase.queryAllStaff();
 
         launch(args);
 
