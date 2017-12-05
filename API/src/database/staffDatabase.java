@@ -15,7 +15,7 @@ public class staffDatabase {
     // hospitalStaff (username U1, password, jobType, fullName, ID PK)
     //////////////////////////////////////////////////////////////////
 
-    private static final String JDBC_URL_STAFF="jdbc:derby:hospitalStaffDB;create=true";
+    private static final String JDBC_URL_STAFF="jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     // Staff Primary Key Counter
@@ -81,7 +81,7 @@ public class staffDatabase {
                     "ID INTEGER," +
                     "CONSTRAINT hospitalStaff_PK PRIMARY KEY (ID)," +
                     "CONSTRAINT hospitalStaff_U1 UNIQUE (username)," +
-                    "CONSTRAINT jobTitle CHECK (jobTitle IN ('Translator', 'Janitor', 'Chef', 'Food Delivery', 'Transport Staff'))," +
+                    "CONSTRAINT jobTitle CHECK (jobTitle IN ('Translator', 'Janitor', 'Chef', 'Food Delivery', 'Transport Staff', 'Sanitation'))," +
                     "CONSTRAINT ID_chk CHECK (ID > 0))");
 
             int rsetCreate3 = stmtCreateStaffTable.executeUpdate(createStaffTable);
@@ -120,7 +120,6 @@ public class staffDatabase {
                 insertStaff.executeUpdate();
 
                 staffCounter++;
-                System.out.printf("%-5d: Insert Staff Successful!\n",(j+1));
             }
 
             conn.commit();
@@ -313,6 +312,57 @@ public class staffDatabase {
     }
 
     ///////////////////////////////////////////////////////////////////////////////
+    // Query all nodes from the node table
+    ///////////////////////////////////////////////////////////////////////////////
+    public static Staff findAStaff(String anyStaffID) {
+        Staff resultStaff = null;
+        try {
+            conn = DriverManager.getConnection(JDBC_URL_STAFF);
+            conn.setAutoCommit(false);
+            conn.getMetaData();
+
+            //Statement selectANode = conn.createStatement();
+            String aStaff = "SELECT * FROM HOSPITALSTAFF WHERE ID = ?";
+
+            PreparedStatement selectAStaff = conn.prepareStatement(aStaff);
+            selectAStaff.setString(1, anyStaffID);
+
+            ResultSet rsetAStaff = selectAStaff.executeQuery();
+
+            //Process the results
+            String strUsername;
+            String strPW;
+            String strTitle;
+            String strFullname;
+            Integer intStaffID;
+
+            //Process the results
+            while (rsetAStaff.next()) {
+                strUsername = rsetAStaff.getString("username");
+                strPW = rsetAStaff.getString("password");
+                strTitle = rsetAStaff.getString("jobTitle");
+                strFullname = rsetAStaff.getString("fullName");
+                intStaffID = rsetAStaff.getInt("ID");
+
+                resultStaff = new Staff(strUsername, strPW, strTitle, strFullname, intStaffID);
+
+            } // End While
+
+            conn.commit();
+            System.out.println();
+
+            rsetAStaff.close();
+            selectAStaff.close();
+            conn.close();
+
+        } // end try
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultStaff;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
     // Write to a output Staff csv file (No Password Encryption)
     ///////////////////////////////////////////////////////////////////////////////
     public static void outputStaffCSV() {
@@ -332,7 +382,6 @@ public class staffDatabase {
                         staffDatabase.allStaff.get(j).getFullName() + "," +
                         staffDatabase.allStaff.get(j).getID()
                 );
-                System.out.printf("%-5d: Staff Record Saved!\n", j);
             }
             System.out.println();
             pw3.flush();

@@ -15,7 +15,7 @@ public class nodeDatabase {
     //        longName, shortName, teamAssigned)
     //////////////////////////////////////////////////////////////////
 
-    private static final String JDBC_URL_MAP="jdbc:derby:hospitalMapDB;create=true";
+    private static final String JDBC_URL_API="jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     // Counters for # total count on each nodeType
@@ -41,7 +41,7 @@ public class nodeDatabase {
 
         try {
 
-            conn = DriverManager.getConnection(JDBC_URL_MAP);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
@@ -71,7 +71,7 @@ public class nodeDatabase {
         System.out.println();
 
         try {
-            conn = DriverManager.getConnection(JDBC_URL_MAP);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
@@ -139,7 +139,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     public static void insertNodesFromCSV() {
         try {
-            conn = DriverManager.getConnection(JDBC_URL_MAP);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
@@ -188,7 +188,6 @@ public class nodeDatabase {
             pw1.println("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned");
             for (int j = 0; j < nodeDatabase.allNodes.size(); j++) {
 
-
                 pw1.println(nodeDatabase.allNodes.get(j).getID() + "," +
                         nodeDatabase.allNodes.get(j).getX()+ "," +
                         nodeDatabase.allNodes.get(j).getY() + "," +
@@ -215,7 +214,7 @@ public class nodeDatabase {
     public static Node findANode(String anyNodeID) {
         Node resultNode = null;
         try {
-            conn = DriverManager.getConnection(JDBC_URL_MAP);
+            conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
 
@@ -266,9 +265,4 @@ public class nodeDatabase {
         }
         return resultNode;
     }
-
-
-
-
-
 }

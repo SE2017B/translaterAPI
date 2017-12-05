@@ -133,6 +133,8 @@
                                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                             </columnConstraints>
                                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -141,34 +143,40 @@
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             </rowConstraints>
                                                             <children>
-                                                                <Label text="Select Request" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+                                                                <Label text="Select Request" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                                                     <font>
                                                                         <Font size="24.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="lblSelectedService" text="Request" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                                                <Label fx:id="lblSelectedService" text="Request" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                                                                     <font>
                                                                         <Font size="24.0" />
                                                                     </font></Label>
-                                                                <JFXButton fx:id="btncreate1" onAction="#resolveServicePressed" prefHeight="50.0" prefWidth="150.0" text="Resolve" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                                                                <JFXButton fx:id="btncreate1" onAction="#resolveServicePressed" prefHeight="50.0" prefWidth="150.0" text="Resolve" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                                                                     <GridPane.margin>
                                                                         <Insets left="20.0" right="20.0" />
                                                                     </GridPane.margin></JFXButton>
-                                                                <Label fx:id="lblSelectedLocation" text="Location" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                                                <Label fx:id="lblSelectedLocation" text="Location" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                                                                     <font>
                                                                         <Font size="24.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="lblSelectedDT" text="Date &amp; Time" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                                                                <Label fx:id="lblSelectedDT" text="Date &amp; Time" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                                                                     <font>
                                                                         <Font size="24.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="lblSelectedAdditionalInfo" text="Additional Info" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                                                                <Label fx:id="lblSelectedAdditionalInfo" text="Additional Info" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6">
                                                                     <font>
                                                                         <Font size="24.0" />
                                                                     </font>
                                                                 </Label>
+                                                <Label text="Select Staff" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <ChoiceBox fx:id="staffResolveServiceChoiceBox" prefWidth="150.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                                                             </children>
                                                         </GridPane>
                                                     </children>
@@ -250,14 +258,6 @@
                                                                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                                     </rowConstraints>
                                                                                     <children>
-                                                                                        <JFXTextField fx:id="usernameDeleteTxt" alignment="CENTER" labelFloat="true" promptText="Username" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                                                                                            <GridPane.margin>
-                                                                                                <Insets left="15.0" right="15.0" />
-                                                                                            </GridPane.margin>
-                                                                                            <font>
-                                                                                                <Font size="24.0" />
-                                                                                            </font>
-                                                                                        </JFXTextField>
                                                                                         <JFXButton fx:id="removeStaffBtn" onAction="#removeStaffPressed" prefHeight="50.0" prefWidth="150.0" text="Remove Staff" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                                                                                             <GridPane.margin>
                                                                                                 <Insets left="20.0" right="20.0" />
@@ -268,14 +268,16 @@
                                                                                                 <Font size="24.0" />
                                                                                             </font>
                                                                                         </Label>
-                                                                                        <JFXTextField fx:id="textFullName" alignment="CENTER" promptText="Full Name" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                                                                                            <GridPane.margin>
-                                                                                                <Insets left="10.0" right="10.0" />
-                                                                                            </GridPane.margin>
-                                                                                            <font>
-                                                                                                <Font size="24.0" />
-                                                                                            </font>
-                                                                                        </JFXTextField>
+                                                                  <Label fx:id="removeUsername" text="Username" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                                                     <font>
+                                                                        <Font size="24.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="removeFullName" text="Full Name" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                                                     <font>
+                                                                        <Font size="24.0" />
+                                                                     </font>
+                                                                  </Label>
                                                                                     </children>
                                                                                 </GridPane>
                                                                             </children>
@@ -332,7 +334,7 @@
                                                                                                         <Font size="24.0" />
                                                                                                     </font>
                                                                                                 </Label>
-                                                                                                <JFXTextField fx:id="fullnameEdit" alignment="CENTER" promptText="Full Name" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                                                                                <JFXTextField fx:id="fullnameEdit" alignment="CENTER" labelFloat="true" promptText="Full Name" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                                                                                     <GridPane.margin>
                                                                                                         <Insets left="10.0" right="10.0" />
                                                                                                     </GridPane.margin>
@@ -340,7 +342,7 @@
                                                                                                         <Font size="24.0" />
                                                                                                     </font>
                                                                                                 </JFXTextField>
-                                                                                                <JFXTextField fx:id="passwordEdit" alignment="CENTER" promptText="Password" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                                                                                                <JFXTextField fx:id="passwordEdit" alignment="CENTER" labelFloat="true" promptText="Password" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                                                                                                     <font>
                                                                                                         <Font size="24.0" />
                                                                                                     </font>

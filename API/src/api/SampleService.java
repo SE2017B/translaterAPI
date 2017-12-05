@@ -4,6 +4,7 @@ import Controllers.RequestController;
 import api.exceptions.ServiceException;
 import com.sun.org.apache.regexp.internal.RE;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -37,6 +38,8 @@ public class SampleService implements ExportableServiceComponent {
             System.out.println(e.getMessage());
             return;
         }
+//        RequestController mySC = new RequestController();
+//        mySC.set
         System.out.println("1");
         primaryStage.setTitle("Make New Translation Request");
         System.out.println("2");
@@ -55,4 +58,5 @@ public class SampleService implements ExportableServiceComponent {
     public static SampleService newInstance(final Stage primaryStage) {
         return new SampleService(primaryStage);
     }
+
 }

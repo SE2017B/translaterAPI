@@ -28,7 +28,7 @@ public class Staff{
     public Staff(String username, String password, String jobTitle, String fullName, int ID){
         this.username = username;
         this.password = password;
-        this.jobTitle = "Sanitation";
+        this.jobTitle = jobTitle;
         this.fullName = fullName;
         this.ID = ID;
 
@@ -88,7 +88,7 @@ public class Staff{
     }
 
     public String toString(){
-        return fullName;
+    return fullName + " : " + username;
     }
 
     public void updateCredidentials(String username, String password, String jobTitle, String fullName, int id) {
