@@ -1,4 +1,3 @@
-
 package database;
 
 import translation.Staff;
@@ -6,7 +5,6 @@ import translation.Staff;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class staffDatabase {
 
@@ -15,7 +13,7 @@ public class staffDatabase {
     // hospitalStaff (username U1, password, jobType, fullName, ID PK)
     //////////////////////////////////////////////////////////////////
 
-    private static final String JDBC_URL_API="jdbc:derby:hospitalAPIDB;create=true";
+    private static final String JDBC_URL_API = "jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     // Staff Primary Key Counter
@@ -28,7 +26,7 @@ public class staffDatabase {
     }
 
     // All staff members from the staff table in hospitalStaffDB
-    static ArrayList<Staff>allStaff=new ArrayList<>();
+    static ArrayList<Staff> allStaff = new ArrayList<>();
 
     ///////////////////////////////////////////////////////////////////////////////
     // Delete staff table
@@ -209,11 +207,11 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Delete a staff member from the staff table
     ///////////////////////////////////////////////////////////////////////////////
-    public static void deleteStaff(Staff anyStaff){
+    public static void deleteStaff(Staff anyStaff) {
 
         int anyStaffID = anyStaff.getID();
 
-        try  {
+        try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();

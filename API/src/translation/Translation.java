@@ -8,7 +8,8 @@
 
 package translation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Translation {
     private String name;
@@ -22,18 +23,17 @@ public class Translation {
         this.staff = new ArrayList<Staff>();
     }
 
-    public ArrayList<Staff> returnEligibleStaff(String language){
+    public ArrayList<Staff> returnEligibleStaff(String language) {
         //We already know the language they are going to feed us is going to be good.
         return languageMap.get(language);
     }
 
-    public void addStaff(ArrayList<String> spokenLanguages, Staff person){
+    public void addStaff(ArrayList<String> spokenLanguages, Staff person) {
         //for each language that the person can speak, we add it to the list of languages we can offer
-        for(String language: spokenLanguages){
-            if(languageMap.containsKey(language)){
+        for (String language : spokenLanguages) {
+            if (languageMap.containsKey(language)) {
                 languageMap.get(language).add(person);
-            }
-            else{
+            } else {
                 ArrayList<Staff> temporaryArrayList = new ArrayList<>();
                 temporaryArrayList.add(person);
                 languageMap.put(language, temporaryArrayList);
@@ -48,6 +48,7 @@ public class Translation {
     public void setRequestedLanguage(String requestedLanguage) {
         this.requestedLanguage = requestedLanguage;
     }
+
     public String getRequestedLanguage() {
         return requestedLanguage;
     }
@@ -55,6 +56,7 @@ public class Translation {
     public int getDuration() {
         return duration;
     }
+
     public void setDuration(int duration) {
         this.duration = duration;
     }

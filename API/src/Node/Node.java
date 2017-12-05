@@ -8,9 +8,7 @@
 
 package Node;
 
-import java.util.ArrayList;
-
-public class Node{
+public class Node {
     private String longName;    //shortName of node
     private String shortName;   //longName of node
     private String ID;      //id of node
@@ -23,7 +21,7 @@ public class Node{
     private String team;
 
     //Constructors
-    public Node(String ID, String x, String y, String floor, String building, String type, String longName, String shortName, String team){
+    public Node(String ID, String x, String y, String floor, String building, String type, String longName, String shortName, String team) {
         this.longName = longName;
         this.shortName = shortName;
         this.ID = ID;
@@ -65,12 +63,12 @@ public class Node{
 //    }
 
     //Gets the Euclidian Distance from a start node to an end node
-    public double getEuclidianDistance(Node otherNode){
+    public double getEuclidianDistance(Node otherNode) {
         double xDeltaSquared = Math.pow((this.x - otherNode.getX()), 2);
         double yDeltaSquared = Math.pow((this.y - otherNode.getY()), 2);
         //scale factor weights the z component so that the path wants to be on the right floor, and it doesn't want to leave it
         //(may need to increase this value)
-        double zDeltaSquared =  Math.pow((this.floor.getNodeMapping() - otherNode.getFloor().getNodeMapping()), 2) * 10000;
+        double zDeltaSquared = Math.pow((this.floor.getNodeMapping() - otherNode.getFloor().getNodeMapping()), 2) * 10000;
         double distance = Math.sqrt(xDeltaSquared + yDeltaSquared + zDeltaSquared);
         return distance;
     }
@@ -79,24 +77,30 @@ public class Node{
     public String getLongName() {
         return longName;
     }
+
     public String getShortName() {
         return this.shortName;
     }
+
     public String getID() {
         return ID;
     }
+
     public String getType() {
         return type;
     }
-    public String getBuilding(){
+
+    public String getBuilding() {
         return this.building;
     }
-//    public ArrayList<Edge> getConnections() {
+
+    //    public ArrayList<Edge> getConnections() {
 //        return this.connections;
 //    }
     public FloorNumber getFloor() {
         return floor;
     }
+
     public String getTeam() {
         return team;
     }
@@ -116,7 +120,8 @@ public class Node{
     public int getX() {
         return x;
     }
-    public String getXString(){
+
+    public String getXString() {
         return Integer.toString(this.x);
     }
 
@@ -124,42 +129,49 @@ public class Node{
     public int getY() {
         return y;
     }
-    public String getYString(){
+
+    public String getYString() {
         return Integer.toString(this.y);
     }
 
     //Setters
-    public void setLongName(String longName){
+    public void setLongName(String longName) {
         this.longName = longName;
     }
+
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
     public void setType(String type) {
         this.type = type;
     }
-    public void setBuilding(String building){
+
+    public void setBuilding(String building) {
         this.building = building;
     }
+
     public void setFloor(String floor) {
         this.floor = FloorNumber.fromDbMapping(floor);
     }
-    public void setX(String x){
+
+    public void setX(String x) {
         this.x = Integer.parseInt(x);
     }
-    public void setY(String y){
+
+    public void setY(String y) {
         this.y = Integer.parseInt(y);
     }
 
     //Override to turn int into a string
     @Override
-    public String toString(){
+    public String toString() {
         return this.shortName;
     }
 
     //Keep this method in mind for when we are having HashTable issues
     @Override
-    public int hashCode(){
+    public int hashCode() {
         final int prime = 7;
         //Commented this out because we were getting some overflow errors
         int ascii = this.shortName.hashCode();
@@ -171,12 +183,12 @@ public class Node{
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(this == obj) return true;
-        if(obj == null) return false;
-        if(!(obj instanceof Node)) return false;
-        Node other = (Node)obj;
-        if(!this.getID().equals(other.getID())) return false;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Node)) return false;
+        Node other = (Node) obj;
+        if (!this.getID().equals(other.getID())) return false;
         return true;
     }
 }

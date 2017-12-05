@@ -8,9 +8,9 @@
 
 package translation;
 
-import Node.*;
+import Node.Node;
 
-public class ServiceRequest{
+public class ServiceRequest {
     private int requestID;
     private Node location;
     private String time;
@@ -36,45 +36,57 @@ public class ServiceRequest{
     public int getRequestID() {
         return requestID;
     }
+
     public void setRequestID(int requestID) {
         this.requestID = requestID;
     }
+
     public Node getLocation() {
         return location;
     }
+
     public void setLocation(Node location) {
         this.location = location;
     }
+
     public String getTime() {
         return time;
     }
+
     public void setTime(String time) {
         this.time = time;
     }
+
     public String getDate() {
         return date;
     }
+
     public void setDate(String date) {
         this.date = date;
     }
+
     public Staff getAssignedPersonnel() {
         return assignedPersonnel;
     }
+
     public String getInputData() {
         return inputData;
     }
+
     public void setInputData(String inputData) {
         this.inputData = inputData;
     }
+
     public String getSeverity() {
         return severity;
     }
+
     public void setSeverity(String severity) {
         this.severity = severity;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String name = String.valueOf(requestID) + " Translation " + location + " " + time + " " + date;
         System.out.println(name);
         return name;

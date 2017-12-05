@@ -1,31 +1,32 @@
 /*
-* Software Engineering 3733, Worcester Polytechnic Institute
-* Team H
-* Code produced for Iteration 2
-* Original author(s): Nicholas Fajardo, Meghana Bhatia
-* The following code
-*/
+ * Software Engineering 3733, Worcester Polytechnic Institute
+ * Team H
+ * Code produced for Iteration 2
+ * Original author(s): Nicholas Fajardo, Meghana Bhatia
+ * The following code
+ */
 
 package translation;
 
 
 import database.staffDatabase;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
 
-public class Staff{
+public class Staff {
     //Only essential for logging in
     private String username;
     private String password;
     private boolean admin;
     //These are just details for display
-    private HashMap<Integer,ServiceRequest> workload;
+    private HashMap<Integer, ServiceRequest> workload;
     private String jobTitle;
     private String fullName;
     private int ID;
 
     //Constructor DB uses
-    public Staff(String username, String password, String jobTitle, String fullName, int ID){
+    public Staff(String username, String password, String jobTitle, String fullName, int ID) {
         this.username = username;
         this.password = password;
         this.jobTitle = jobTitle;
@@ -36,7 +37,7 @@ public class Staff{
         workload = new HashMap<Integer, ServiceRequest>();
     }
 
-    public void removeRequest(ServiceRequest request){
+    public void removeRequest(ServiceRequest request) {
         workload.remove(request.getRequestID());
     }
 
@@ -56,39 +57,49 @@ public class Staff{
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getJobTitle() {
         return jobTitle;
     }
+
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
+
     public String getFullName() {
         return fullName;
     }
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
     public int getID() {
         return ID;
     }
+
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public String toString(){
-    return fullName + " : " + username;
+    public String toString() {
+        return fullName + " : " + username;
     }
 
     public void updateCredidentials(String username, String password, String jobTitle, String fullName) {
@@ -99,22 +110,22 @@ public class Staff{
         staffDatabase.modifyStaff(this);
     }
 
-    public void addRequest(ServiceRequest newRequest){
+    public void addRequest(ServiceRequest newRequest) {
         workload.put(newRequest.getRequestID(), newRequest);
     }
-    public Collection<ServiceRequest> getAllRequest(){
+
+    public Collection<ServiceRequest> getAllRequest() {
         return workload.values();
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(this == obj) return true;
-        if(obj == null) return false;
-        if(!(obj instanceof Staff)) return false;
-        Staff other = (Staff)obj;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Staff)) return false;
+        Staff other = (Staff) obj;
         return this.getID() == (other.getID());
     }
-
 
 
 }

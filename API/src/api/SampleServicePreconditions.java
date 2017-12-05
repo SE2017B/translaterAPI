@@ -21,9 +21,9 @@ class SampleServicePreconditions {
         final Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
         if (xCoord < primaryScreenBounds.getMinX() ||
-            yCoord < primaryScreenBounds.getMinY() ||
-            xCoord > primaryScreenBounds.getMaxX() ||
-            yCoord > primaryScreenBounds.getMaxY()) {
+                yCoord < primaryScreenBounds.getMinY() ||
+                xCoord > primaryScreenBounds.getMaxX() ||
+                yCoord > primaryScreenBounds.getMaxY()) {
             SampleServicePreconditions.throwInvalidStartingCoordinatesException(xCoord, yCoord);
         }
     }
@@ -34,7 +34,7 @@ class SampleServicePreconditions {
 
     static void verifyWindowDimensions(final int windowHeight, final int windowWidth) {
         if (windowWidth < SampleServicePreconditions.MIN_WINDOW_WIDTH ||
-            windowHeight < SampleServicePreconditions.MIN_WINDOW_HEIGHT) {
+                windowHeight < SampleServicePreconditions.MIN_WINDOW_HEIGHT) {
             SampleServicePreconditions.throwInvalidWindowDimensionsException(windowHeight, windowWidth);
         }
     }

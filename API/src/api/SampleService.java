@@ -2,12 +2,11 @@ package api;
 
 import Controllers.RequestController;
 import api.exceptions.ServiceException;
-import com.sun.org.apache.regexp.internal.RE;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class SampleService implements ExportableServiceComponent {

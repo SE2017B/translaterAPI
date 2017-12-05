@@ -15,7 +15,7 @@ public class nodeDatabase {
     //        longName, shortName, teamAssigned)
     //////////////////////////////////////////////////////////////////
 
-    private static final String JDBC_URL_API="jdbc:derby:hospitalAPIDB;create=true";
+    private static final String JDBC_URL_API = "jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     // Counters for # total count on each nodeType
@@ -32,7 +32,7 @@ public class nodeDatabase {
     private static int servCounter;
 
     // All nodes from the node table in hospitalMapDB
-    static ArrayList<Node> allNodes=new ArrayList<>();
+    static ArrayList<Node> allNodes = new ArrayList<>();
 
     ///////////////////////////////////////////////////////////////////////////////
     // Delete nodes table
@@ -112,7 +112,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Read from Nodes CSV File and store columns in array lists
     ///////////////////////////////////////////////////////////////////////////////
-    public static void readNodeCSV (String fname) {
+    public static void readNodeCSV(String fname) {
 
         File nodefile = new File(fname);
 
@@ -189,13 +189,13 @@ public class nodeDatabase {
             for (int j = 0; j < nodeDatabase.allNodes.size(); j++) {
 
                 pw1.println(nodeDatabase.allNodes.get(j).getID() + "," +
-                        nodeDatabase.allNodes.get(j).getX()+ "," +
+                        nodeDatabase.allNodes.get(j).getX() + "," +
                         nodeDatabase.allNodes.get(j).getY() + "," +
                         nodeDatabase.allNodes.get(j).getFloor().getDbMapping() + "," +
                         nodeDatabase.allNodes.get(j).getBuilding() + "," +
                         nodeDatabase.allNodes.get(j).getType() + "," +
                         nodeDatabase.allNodes.get(j).getLongName() + "," +
-                        nodeDatabase.allNodes.get(j).getShortName()+ "," +
+                        nodeDatabase.allNodes.get(j).getShortName() + "," +
                         nodeDatabase.allNodes.get(j).getTeam()
                 );
             }

@@ -1,8 +1,8 @@
 package database;
 
-import translation.Staff;
-import translation.ServiceRequest;
 import Node.Node;
+import translation.ServiceRequest;
+import translation.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class serviceDatabase {
     // serviceRequests (requestID PK, locationID, time, date, staffID, severity, comments)
     //////////////////////////////////////////////////////////////////
 
-    private static final String JDBC_URL_API="jdbc:derby:hospitalAPIDB;create=true";
+    private static final String JDBC_URL_API = "jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -124,11 +124,11 @@ public class serviceDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Delete a serviceRequest from the table
     ///////////////////////////////////////////////////////////////////////////////
-    public static void deleteService(ServiceRequest anyRequest){
+    public static void deleteService(ServiceRequest anyRequest) {
 
         int anyServiceID = anyRequest.getRequestID();
 
-        try  {
+        try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
