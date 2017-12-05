@@ -35,9 +35,9 @@ public class nodeDatabase {
     static ArrayList<Node> allNodes=new ArrayList<>();
 
     // Getter for Arraylist of all nodes
-    public static ArrayList<Node> getNodes(){
-        return allNodes;
-    }
+    //public static ArrayList<Node> getNodes(){
+        //return allNodes;
+    //}
 
     ///////////////////////////////////////////////////////////////////////////////
     // Delete nodes table
@@ -114,6 +114,107 @@ public class nodeDatabase {
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // Read from Nodes CSV File and store columns in array lists
+    ///////////////////////////////////////////////////////////////////////////////
+    public static void readNodeCSV (String fname) {
+
+        File nodefile = new File(fname);
+
+        try {
+            Scanner inputStreamNodes = new Scanner(nodefile);
+            inputStreamNodes.nextLine();
+            while (inputStreamNodes.hasNext()) {
+
+                String nodeData = inputStreamNodes.nextLine();
+                String[] nodeValues = nodeData.split(",");
+
+                nodeDatabase.allNodes.add(new Node(nodeValues[0], nodeValues[1], nodeValues[2], nodeValues[3], nodeValues[4], nodeValues[5], nodeValues[6], nodeValues[7], nodeValues[8]));
+
+            }
+            inputStreamNodes.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Insert into nodes table using a prepared statement from csv
+    ///////////////////////////////////////////////////////////////////////////////
+    public static void insertNodesFromCSV() {
+        try {
+            conn = DriverManager.getConnection(JDBC_URL_MAP);
+            conn.setAutoCommit(false);
+
+            DatabaseMetaData meta = conn.getMetaData();
+            ResultSet res = meta.getTables(null, null, "NODES", null);
+
+            PreparedStatement insertNode = conn.prepareStatement("INSERT INTO nodes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+
+            for (int j = 0; j < allNodes.size(); j++) {
+
+                insertNode.setString(1, allNodes.get(j).getID());
+                insertNode.setInt(2, allNodes.get(j).getX());
+                insertNode.setInt(3, allNodes.get(j).getY());
+                insertNode.setString(4, nodeDatabase.allNodes.get(j).getFloor().getDbMapping());
+                insertNode.setString(5, nodeDatabase.allNodes.get(j).getBuilding());
+                insertNode.setString(6, nodeDatabase.allNodes.get(j).getType());
+                insertNode.setString(7, nodeDatabase.allNodes.get(j).getLongName());
+                insertNode.setString(8, nodeDatabase.allNodes.get(j).getShortName());
+                insertNode.setString(9, nodeDatabase.allNodes.get(j).getTeam());
+
+                insertNode.executeUpdate();
+                System.out.printf("%-5d: Insert Node Successful!\n",(j+1));
+            }
+
+            conn.commit();
+            System.out.println();
+
+            insertNode.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();// end try
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Write to a output Nodes csv file
+    ///////////////////////////////////////////////////////////////////////////////
+    public static void outputNodesCSV() {
+        String outNodesFileName = "outputNodes.csv";
+
+        try {
+            FileWriter fw1 = new FileWriter(outNodesFileName, false);
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+            PrintWriter pw1 = new PrintWriter(bw1);
+
+            pw1.println("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned");
+            for (int j = 0; j < nodeDatabase.allNodes.size(); j++) {
+
+
+                pw1.println(nodeDatabase.allNodes.get(j).getID() + "," +
+                        nodeDatabase.allNodes.get(j).getX()+ "," +
+                        nodeDatabase.allNodes.get(j).getY() + "," +
+                        nodeDatabase.allNodes.get(j).getFloor().getDbMapping() + "," +
+                        nodeDatabase.allNodes.get(j).getBuilding() + "," +
+                        nodeDatabase.allNodes.get(j).getType() + "," +
+                        nodeDatabase.allNodes.get(j).getLongName() + "," +
+                        nodeDatabase.allNodes.get(j).getShortName()+ "," +
+                        nodeDatabase.allNodes.get(j).getTeam()
+                );
+                System.out.printf("%-5d: Node Record Saved!\n", j);
+            }
+            System.out.println();
+            pw1.flush();
+            pw1.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     // Query all nodes from the node table
@@ -125,9 +226,13 @@ public class nodeDatabase {
             conn.setAutoCommit(false);
             conn.getMetaData();
 
-            Statement selectANode = conn.createStatement();
-            String aNode = "SELECT * FROM NODES WHERE nodeID = " + anyNodeID;
-            ResultSet rsetANode = selectANode.executeQuery(aNode);
+            //Statement selectANode = conn.createStatement();
+            String aNode = "SELECT * FROM NODES WHERE nodeID = ?";
+
+            PreparedStatement selectANode = conn.prepareStatement(aNode);
+            selectANode.setString(1, anyNodeID);
+
+            ResultSet rsetANode = selectANode.executeQuery();
 
             String strNodeID;
             String strXCoord;
@@ -152,7 +257,7 @@ public class nodeDatabase {
                 strTeamAssigned = rsetANode.getString("teamAssigned");
 
                 resultNode = new Node(strNodeID, strXCoord, strYCoord, strFloor, strBuilding, strNodeType, strLongName, strShortName, strTeamAssigned);
-                System.out.printf("%-20s %-20d %-20d %-20s %-20s %-20s %-50s %-30s %-20s\n", strNodeID, strXCoord, strYCoord, strFloor, strBuilding, strNodeType, strLongName, strShortName, strTeamAssigned);
+
             } // End While
 
             conn.commit();
