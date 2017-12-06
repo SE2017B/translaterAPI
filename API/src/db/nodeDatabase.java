@@ -111,7 +111,7 @@ public class nodeDatabase {
 
                 if (count != 0) {
                     nodeDatabase.allNodes.add(new Node(nodeValues[0], nodeValues[1], nodeValues[2], nodeValues[3], nodeValues[4], nodeValues[5], nodeValues[6], nodeValues[7], nodeValues[8]));
-
+                    System.out.println("Read Success!");
                 }
                 count++;
             }
@@ -153,7 +153,7 @@ public class nodeDatabase {
             }
 
             conn.commit();
-            System.out.println();
+            System.out.println("HH");
 
             insertNode.close();
             conn.close();
