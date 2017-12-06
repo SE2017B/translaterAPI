@@ -232,7 +232,7 @@ public class RequestController {
         Node loc = nodeDatabase.findANode(locID);
         location = loc;
         if (location == null) {
-            System.out.println("double fuck me");
+            System.out.println("Error");
         }
     }
 

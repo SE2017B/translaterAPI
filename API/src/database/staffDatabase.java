@@ -31,7 +31,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Delete staff table
     ///////////////////////////////////////////////////////////////////////////////
-    public static void deleteStaffTable() {
+    public void deleteStaffTable() {
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -59,7 +59,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Create a table for the Staff Members
     ///////////////////////////////////////////////////////////////////////////////
-    public static void createStaffTable() {
+    public void createStaffTable() {
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -95,7 +95,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Insert into staff table using a prepared statement from csv
     ///////////////////////////////////////////////////////////////////////////////
-    public static void insertStaffFromCSV() {
+    public void insertStaffFromCSV() {
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
@@ -363,7 +363,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Write to a output Staff csv file (No Password Encryption)
     ///////////////////////////////////////////////////////////////////////////////
-    public static void outputStaffCSV() {
+    public void outputStaffCSV() {
         String outStaffFileName = "outputStaff.csv";
 
         try {

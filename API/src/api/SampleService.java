@@ -27,7 +27,6 @@ public class SampleService implements ExportableServiceComponent {
         SampleServicePreconditions.verifyWindowDimensions(windowLength, windowWidth);
         // TODO: Run other precondition checks here
         // All checks passed; spawn the window
-
         try {
             DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 
@@ -35,13 +34,13 @@ public class SampleService implements ExportableServiceComponent {
             e.printStackTrace();
         }
 
-        nodeDatabase.deleteNodeTable();
-        staffDatabase.deleteStaffTable();
-        serviceDatabase.deleteRequestsTable();
+        new nodeDatabase().deleteNodeTable();
+        new staffDatabase().deleteStaffTable();
+        new serviceDatabase().deleteRequestsTable();
 
-        nodeDatabase.createNodeTable();
-        staffDatabase.createStaffTable();
-        serviceDatabase.createServiceTable();
+        new nodeDatabase().createNodeTable();
+        new staffDatabase().createStaffTable();
+        new serviceDatabase().createServiceTable();
 
         new nodeDatabase().readNodeCSV("/csv/MapAnodes.csv");
         new nodeDatabase().readNodeCSV("/csv/MapBnodes.csv");
@@ -53,14 +52,14 @@ public class SampleService implements ExportableServiceComponent {
         new nodeDatabase().readNodeCSV("/csv/MapHnodes.csv");
         new nodeDatabase().readNodeCSV("/csv/MapInodes.csv");
         new nodeDatabase().readNodeCSV("/csv/MapWnodes.csv");
-        nodeDatabase.insertNodesFromCSV();
+        new nodeDatabase().insertNodesFromCSV();
 
         new staffDatabase().readStaffCSV("/csv/staffMembers.csv");
-        staffDatabase.insertStaffFromCSV();
+        new staffDatabase().insertStaffFromCSV();
 
 
-        nodeDatabase.outputNodesCSV();
-        staffDatabase.outputStaffCSV();
+        new nodeDatabase().outputNodesCSV();
+        new staffDatabase().outputStaffCSV();
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
         RequestController.setLocation(destNodeID);
     }

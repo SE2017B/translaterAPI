@@ -25,7 +25,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Delete nodes table
     ///////////////////////////////////////////////////////////////////////////////
-    public static void deleteNodeTable() {
+    public void deleteNodeTable() {
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -53,7 +53,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Create a table for the nodes
     ///////////////////////////////////////////////////////////////////////////////
-    public static void createNodeTable() {
+    public void createNodeTable() {
 
         System.out.println();
 
@@ -128,7 +128,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Insert into nodes table using a prepared statement from csv
     ///////////////////////////////////////////////////////////////////////////////
-    public static void insertNodesFromCSV() {
+    public void insertNodesFromCSV() {
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
@@ -168,7 +168,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Write to a output Nodes csv file
     ///////////////////////////////////////////////////////////////////////////////
-    public static void outputNodesCSV() {
+    public void outputNodesCSV() {
         String outNodesFileName = "outputNodes.csv";
 
         try {
