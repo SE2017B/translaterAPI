@@ -53,22 +53,19 @@ public class SampleService implements ExportableServiceComponent {
         staffDatabase.outputStaffCSV();
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
         RequestController.setLocation(destNodeID);
-        System.out.println("СУКА БЛЯ");
     }
 
     private void showServiceWindow(final int xcoord, final int ycoord, final int windowWidth, final int windowLength) {
         Parent root;
-        System.out.println(".3");
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/RequestAPI.fxml"));
-            System.out.println(".2");
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return;
         }
 //        RequestController mySC = new RequestController();
 //        mySC.set
-        System.out.println("1");
+
         primaryStage.setTitle("Make New Translation Request");
         System.out.println("2");
         primaryStage.setScene(new Scene(root, windowWidth, windowLength));

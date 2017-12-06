@@ -89,7 +89,6 @@ public class ServiceRequest {
         return task;
     }
 
-
     @Override
     public String toString() {
         String name = String.valueOf(requestID) + " " + location + " " + severity + " " + inputData;

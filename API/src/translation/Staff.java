@@ -41,13 +41,6 @@ public class Staff {
         workload.remove(request.getRequestID());
     }
 
-    //Takes in an old password and a new password, and changes the staff's current password to the new one.
-
-    //Update
-//    public void uptadeDB(){
-//        mainDatabase.modifyStaff(this);
-//    }
-
     //Important Getters and Setters
     public boolean isAdmin() {
         return admin;
