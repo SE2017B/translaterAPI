@@ -9,7 +9,7 @@
 package translation;
 
 
-import database.staffDatabase;
+import db.staffDatabase;
 
 import java.util.Collection;
 import java.util.HashMap;

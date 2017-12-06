@@ -1,10 +1,10 @@
 package api;
 
-import Controllers.RequestController;
+import Rollers.RequestController;
 import api.exceptions.ServiceException;
-import database.nodeDatabase;
-import database.serviceDatabase;
-import database.staffDatabase;
+import db.nodeDatabase;
+import db.serviceDatabase;
+import db.staffDatabase;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,17 +14,17 @@ import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class SampleService implements ExportableServiceComponent {
+public class SanitationService implements ExportableServiceComponent {
     private final Stage primaryStage;
 
-    private SampleService(final Stage primaryStage) {
+    private SanitationService(final Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
     @Override
     public void run(int xcoord, int ycoord, int windowWidth, int windowLength, String cssPath, String destNodeID, String originNodeID) throws ServiceException {
-        SampleServicePreconditions.verifyStartingCoordinates(xcoord, ycoord);
-        SampleServicePreconditions.verifyWindowDimensions(windowLength, windowWidth);
+        SanitationServicePreconditions.verifyStartingCoordinates(xcoord, ycoord);
+        SanitationServicePreconditions.verifyWindowDimensions(windowLength, windowWidth);
         // TODO: Run other precondition checks here
         // All checks passed; spawn the window
         try {
@@ -34,6 +34,9 @@ public class SampleService implements ExportableServiceComponent {
             e.printStackTrace();
         }
 
+        System.out.println("\n\n\n\nhelp me\n\n\n\n");
+
+
         nodeDatabase.deleteNodeTable();
         staffDatabase.deleteStaffTable();
         serviceDatabase.deleteRequestsTable();
@@ -42,24 +45,25 @@ public class SampleService implements ExportableServiceComponent {
         staffDatabase.createStaffTable();
         serviceDatabase.createServiceTable();
 
-        nodeDatabase.readNodeCSV("/csv/MapAnodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapBnodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapCnodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapDnodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapEnodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapFnodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapGnodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapHnodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapInodes.csv");
-        nodeDatabase.readNodeCSV("/csv/MapWnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapAnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapBnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapCnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapDnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapEnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapFnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapGnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapHnodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapInodes.csv");
+        nodeDatabase.readNodeCSV("/rez/MapWnodes.csv");
         nodeDatabase.insertNodesFromCSV();
 
-        staffDatabase.readStaffCSV("/csv/staffMembers.csv");
+        staffDatabase.readStaffCSV("/rez/staffMembers.csv");
         staffDatabase.insertStaffFromCSV();
 
+        System.out.println("\n\n\n\nhelp me\n\n\n\n");
 
-        nodeDatabase.outputNodesCSV();
-        staffDatabase.outputStaffCSV();
+//        nodeDatabase.outputNodesCSV();
+//        staffDatabase.outputStaffCSV();
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
         RequestController.setLocation(destNodeID);
     }
@@ -89,8 +93,8 @@ public class SampleService implements ExportableServiceComponent {
 //        RequestController.init();
     }
 
-    public static SampleService newInstance(final Stage primaryStage) {
-        return new SampleService(primaryStage);
+    public static SanitationService newInstance(final Stage primaryStage) {
+        return new SanitationService(primaryStage);
     }
 
 }

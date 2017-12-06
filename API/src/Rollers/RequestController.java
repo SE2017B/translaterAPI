@@ -5,13 +5,13 @@
  * Original author(s): Travis Norris, Andrey Yuzvik
  * The following code
  */
-package Controllers;
+package Rollers;
 
 import Node.Node;
 import com.jfoenix.controls.*;
-import database.nodeDatabase;
-import database.serviceDatabase;
-import database.staffDatabase;
+import db.nodeDatabase;
+import db.serviceDatabase;
+import db.staffDatabase;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

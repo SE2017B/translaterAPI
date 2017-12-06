@@ -1,4 +1,4 @@
-package database;
+package db;
 
 import Node.Node;
 import translation.ServiceRequest;

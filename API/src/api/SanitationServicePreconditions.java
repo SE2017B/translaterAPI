@@ -5,11 +5,11 @@ import api.exceptions.InvalidWindowDimensionsException;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 
-class SampleServicePreconditions {
+class SanitationServicePreconditions {
     private static final int MIN_WINDOW_WIDTH = 200;
     private static final int MIN_WINDOW_HEIGHT = 400;
 
-    private SampleServicePreconditions() {
+    private SanitationServicePreconditions() {
 
     }
 
@@ -24,7 +24,7 @@ class SampleServicePreconditions {
                 yCoord < primaryScreenBounds.getMinY() ||
                 xCoord > primaryScreenBounds.getMaxX() ||
                 yCoord > primaryScreenBounds.getMaxY()) {
-            SampleServicePreconditions.throwInvalidStartingCoordinatesException(xCoord, yCoord);
+            SanitationServicePreconditions.throwInvalidStartingCoordinatesException(xCoord, yCoord);
         }
     }
 
@@ -33,9 +33,9 @@ class SampleServicePreconditions {
     }
 
     static void verifyWindowDimensions(final int windowHeight, final int windowWidth) {
-        if (windowWidth < SampleServicePreconditions.MIN_WINDOW_WIDTH ||
-                windowHeight < SampleServicePreconditions.MIN_WINDOW_HEIGHT) {
-            SampleServicePreconditions.throwInvalidWindowDimensionsException(windowHeight, windowWidth);
+        if (windowWidth < SanitationServicePreconditions.MIN_WINDOW_WIDTH ||
+                windowHeight < SanitationServicePreconditions.MIN_WINDOW_HEIGHT) {
+            SanitationServicePreconditions.throwInvalidWindowDimensionsException(windowHeight, windowWidth);
         }
     }
 }
