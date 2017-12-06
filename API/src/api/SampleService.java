@@ -2,6 +2,9 @@ package api;
 
 import Controllers.RequestController;
 import api.exceptions.ServiceException;
+import database.nodeDatabase;
+import database.serviceDatabase;
+import database.staffDatabase;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,7 +25,32 @@ public class SampleService implements ExportableServiceComponent {
         SampleServicePreconditions.verifyWindowDimensions(windowLength, windowWidth);
         // TODO: Run other precondition checks here
         // All checks passed; spawn the window
+        nodeDatabase.deleteNodeTable();
+        staffDatabase.deleteStaffTable();
+        serviceDatabase.deleteRequestsTable();
 
+        nodeDatabase.createNodeTable();
+        staffDatabase.createStaffTable();
+        serviceDatabase.createServiceTable();
+
+        new nodeDatabase().readNodeCSV("/csv/MapAnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapBnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapCnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapDnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapEnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapFnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapGnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapHnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapInodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapWnodes.csv");
+        nodeDatabase.insertNodesFromCSV();
+
+        new staffDatabase().readStaffCSV("/csv/staffMembers.csv");
+        staffDatabase.insertStaffFromCSV();
+
+
+        nodeDatabase.outputNodesCSV();
+        staffDatabase.outputStaffCSV();
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
         RequestController.setLocation(destNodeID);
         System.out.println("СУКА БЛЯ");

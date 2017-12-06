@@ -103,6 +103,9 @@ public class nodeDatabase {
     public void readNodeCSV(String fname) {
         int count = 0;
         InputStream in = getClass().getResourceAsStream(fname);
+        if(in == null){
+            System.out.println("\n\n\nNode help\n\n\n");
+        }
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
         try {

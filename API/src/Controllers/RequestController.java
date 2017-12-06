@@ -320,7 +320,7 @@ public class RequestController {
         //Service tempService = addStaffServiceChoiceBox.getValue();
         Staff nStaff;
         //todo how to make new staff and send it out
-        nStaff = new Staff(usernameTxt.getText(), passwordTxt.getText(), "Sanitation", fullNametxt.getText(), staffId);
+        nStaff = new Staff(usernameTxt.getText(), passwordTxt.getText(), "Sanitation", fullNametxt.getText(), Integer.toString(staffId));
         tempAL.add(nStaff);
         staffDatabase.addStaff(nStaff);
         staffResolveServiceChoiceBox.getItems().clear();

@@ -99,7 +99,7 @@ public class serviceDatabase {
             addAnyService.setString(2, anyService.getLocation().getID());
             addAnyService.setString(3, anyService.getTime());
             addAnyService.setString(4, anyService.getDate());
-            addAnyService.setInt(5, anyService.getAssignedPersonnel().getID());
+            addAnyService.setString(5, anyService.getAssignedPersonnel().getID());
             addAnyService.setString(6, anyService.getSeverity());
             addAnyService.setString(7, anyService.getInputData());
 
@@ -207,7 +207,7 @@ public class serviceDatabase {
     public static ArrayList<ServiceRequest> findStaffMemRequests(Staff anyStaff) {
 
         ArrayList<ServiceRequest> resultServices = new ArrayList<>();
-        int anyID = anyStaff.getID();
+        String anyID = anyStaff.getID();
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -217,7 +217,7 @@ public class serviceDatabase {
             String staffMemServices = "SELECT * FROM serviceRequests WHERE staffID = ?";
 
             PreparedStatement selectStaffServices = conn.prepareStatement(staffMemServices);
-            selectStaffServices.setInt(1, anyID);
+            selectStaffServices.setString(1, anyID);
 
             ResultSet rsetStaffServices = selectStaffServices.executeQuery();
 

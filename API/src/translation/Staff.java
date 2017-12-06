@@ -23,10 +23,10 @@ public class Staff {
     private HashMap<Integer, ServiceRequest> workload;
     private String jobTitle;
     private String fullName;
-    private int ID;
+    private String ID;
 
     //Constructor DB uses
-    public Staff(String username, String password, String jobTitle, String fullName, int ID) {
+    public Staff(String username, String password, String jobTitle, String fullName, String ID) {
         this.username = username;
         this.password = password;
         this.jobTitle = jobTitle;
@@ -90,11 +90,11 @@ public class Staff {
         this.fullName = fullName;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -124,7 +124,7 @@ public class Staff {
         if (obj == null) return false;
         if (!(obj instanceof Staff)) return false;
         Staff other = (Staff) obj;
-        return this.getID() == (other.getID());
+        return this.getID().equals(other.getID());
     }
 
 

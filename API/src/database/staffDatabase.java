@@ -113,7 +113,7 @@ public class staffDatabase {
                 insertStaff.setString(2, allStaff.get(j).getPassword());
                 insertStaff.setString(3, allStaff.get(j).getJobTitle());
                 insertStaff.setString(4, allStaff.get(j).getFullName());
-                insertStaff.setInt(5, allStaff.get(j).getID());
+                insertStaff.setString(5, allStaff.get(j).getID());
 
                 getStaffCounter();
 
@@ -147,12 +147,12 @@ public class staffDatabase {
             addAnyStaff.setString(2, anyStaff.getPassword());
             addAnyStaff.setString(3, anyStaff.getJobTitle());
             addAnyStaff.setString(4, anyStaff.getFullName());
-            addAnyStaff.setInt(5, anyStaff.getID());
+            addAnyStaff.setString(5, anyStaff.getID());
 
             addAnyStaff.executeUpdate();
 
-            System.out.printf("Insert Staff Successful for staffID: %-5d\n", anyStaff.getID());
-            System.out.println();
+//            System.out.printf("Insert Staff Successful for staffID: %-5d\n", anyStaff.getID());
+//            System.out.println();
 
             conn.commit();
 
@@ -180,7 +180,7 @@ public class staffDatabase {
             String strModAdd = "INSERT INTO hospitalStaff VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement modDelAnyStaff = conn.prepareStatement(strModDrop);
-            modDelAnyStaff.setInt(1, anyStaff.getID());
+            modDelAnyStaff.setString(1, anyStaff.getID());
             modDelAnyStaff.executeUpdate();
 
             PreparedStatement modAddAnyStaff = conn.prepareStatement(strModAdd);
@@ -189,7 +189,7 @@ public class staffDatabase {
             modAddAnyStaff.setString(2, anyStaff.getPassword());
             modAddAnyStaff.setString(3, anyStaff.getJobTitle());
             modAddAnyStaff.setString(4, anyStaff.getFullName());
-            modAddAnyStaff.setInt(5, anyStaff.getID());
+            modAddAnyStaff.setString(5, anyStaff.getID());
 
             System.out.println("Update Staff Member Successful!");
 
@@ -208,7 +208,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     public static void deleteStaff(Staff anyStaff) {
 
-        int anyStaffID = anyStaff.getID();
+        String anyStaffID = anyStaff.getID();
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -218,7 +218,7 @@ public class staffDatabase {
             PreparedStatement deleteAnyStaff = conn.prepareStatement("DELETE FROM hospitalStaff WHERE ID = ?");
 
             // set the corresponding param
-            deleteAnyStaff.setInt(1, anyStaffID);
+            deleteAnyStaff.setString(1, anyStaffID);
             // execute the delete statement
             deleteAnyStaff.executeUpdate();
 
@@ -257,7 +257,7 @@ public class staffDatabase {
             String strPW;
             String strTitle;
             String strFullname;
-            Integer intStaffID;
+            String intStaffID;
 
             //Process the results
             while (rsetAllStaff.next()) {
@@ -265,7 +265,7 @@ public class staffDatabase {
                 strPW = rsetAllStaff.getString("password");
                 strTitle = rsetAllStaff.getString("jobTitle");
                 strFullname = rsetAllStaff.getString("fullName");
-                intStaffID = rsetAllStaff.getInt("ID");
+                intStaffID = rsetAllStaff.getString("ID");
 
                 resultStaff.add(new Staff(strUsername, strPW, strTitle, strFullname, intStaffID));
 
@@ -308,7 +308,7 @@ public class staffDatabase {
             String strPW;
             String strTitle;
             String strFullname;
-            Integer intStaffID;
+            String intStaffID;
 
             //Process the results
             while (rsetAStaff.next()) {
@@ -316,7 +316,7 @@ public class staffDatabase {
                 strPW = rsetAStaff.getString("password");
                 strTitle = rsetAStaff.getString("jobTitle");
                 strFullname = rsetAStaff.getString("fullName");
-                intStaffID = rsetAStaff.getInt("ID");
+                intStaffID = rsetAStaff.getString("ID");
 
                 resultStaff = new Staff(strUsername, strPW, strTitle, strFullname, intStaffID);
 
@@ -342,6 +342,9 @@ public class staffDatabase {
     public void readStaffCSV(String fname) {
         int count = 0;
         InputStream in = getClass().getResourceAsStream(fname);
+        if(in == null){
+            System.out.println("\n\n\nhelp\n\n\n");
+        }
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
         try {
@@ -351,7 +354,7 @@ public class staffDatabase {
                 String[] staffValues = line.split(",");
 
                 if (count != 0) {
-                    staffDatabase.allStaff.add(new Staff(staffValues[0], staffValues[1], staffValues[2], staffValues[3], Integer.parseInt(staffValues[4])));
+                    staffDatabase.allStaff.add(new Staff(staffValues[0], staffValues[1], staffValues[2], staffValues[3], staffValues[4]));
                 }
                 count++;
             }
