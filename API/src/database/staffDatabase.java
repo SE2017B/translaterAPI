@@ -115,9 +115,9 @@ public class staffDatabase {
                 insertStaff.setString(4, allStaff.get(j).getFullName());
                 insertStaff.setInt(5, allStaff.get(j).getID());
 
-                insertStaff.executeUpdate();
+                getStaffCounter();
 
-                staffCounter++;
+                insertStaff.executeUpdate();
             }
 
             conn.commit();
@@ -135,8 +135,6 @@ public class staffDatabase {
     // Add a Staff member to Staff table Function
     ///////////////////////////////////////////////////////////////////////////////
     public static void addStaff(Staff anyStaff) {
-
-        staffCounter++;
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -172,6 +170,7 @@ public class staffDatabase {
     // Modify a Staff Member in the Staff Database
     ///////////////////////////////////////////////////////////////////////////////
     public static void modifyStaff(Staff anyStaff) {
+
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
@@ -233,6 +232,8 @@ public class staffDatabase {
             System.out.println(e.getMessage());
         }
         int indexOf = allStaff.indexOf(anyStaff);
+        System.out.println("ID: " + anyStaff.getID());
+        System.out.println("indexOf: " + indexOf);
         allStaff.remove(indexOf);
     }
 

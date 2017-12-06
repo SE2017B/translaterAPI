@@ -311,9 +311,10 @@ public class RequestController {
     void createStaffPressed(ActionEvent event) {
 //
         //todo ADJUST FOR API
-        staffId = staffDatabase.getStaffCounter() + 10;
+        staffId = staffDatabase.getStaffCounter() + 1;
 
-        ArrayList<Staff> tempAL = new ArrayList<>(staffForCB);
+        ArrayList<Staff> tempAL = new ArrayList<>();
+        tempAL.addAll(staffForCB);
 
         System.out.println(usernameTxt.getText() + " " + passwordTxt.getText() + " " + fullNametxt.getText());
         //Service tempService = addStaffServiceChoiceBox.getValue();
@@ -327,6 +328,12 @@ public class RequestController {
         staffListView.getItems().clear();
         //staffListView.setItems(FXCollections.observableList(staffForCB));
         staffChoiceBox.getItems().clear();
+
+        usernameTxt.clear();
+        passwordTxt.clear();
+        fullNametxt.clear();
+
+        staffForCB.clear();
 
         staffResolveServiceChoiceBox.setItems(FXCollections.observableList(tempAL));
         staffListView1.setItems(FXCollections.observableList(tempAL));
@@ -345,7 +352,8 @@ public class RequestController {
     @FXML
     void removeStaffPressed(ActionEvent event) {
 
-        ArrayList<Staff> tempAL = new ArrayList<>(staffForCB);
+        ArrayList<Staff> tempAL = new ArrayList<>();
+        tempAL.addAll(staffForCB);
         //todo ADJUST FOR API
         if (tempAL.remove(staffListView.getSelectionModel().getSelectedItem())) {
             System.out.println("cant find the node");
@@ -353,13 +361,13 @@ public class RequestController {
 
         staffDatabase.deleteStaff(staffListView.getSelectionModel().getSelectedItem());
 
-
         staffResolveServiceChoiceBox.getItems().clear();
         staffListView1.getItems().clear();
         staffListView.getItems().clear();
         //staffListView.setItems(FXCollections.observableList(staffForCB));
         staffChoiceBox.getItems().clear();
 
+        staffForCB.clear();
 
         //staffListView.setItems(FXCollections.observableList(staffForCB));
         staffListView.setItems(FXCollections.observableList(tempAL));
@@ -370,6 +378,9 @@ public class RequestController {
             System.out.println("life is good");
             staffForCB.addAll(tempAL);
         }
+
+        removeUsername.setText("Username");
+        removeFullName.setText("Full Name");
 //        depSub.deleteStaff(tempService, tempUsername);
 //
 //        staffListView.setItems(FXCollections.observableList(staffDatabase.getStaff()));
@@ -399,6 +410,10 @@ public class RequestController {
         String tempPassword = passwordEdit.getText();
         String tempFullName = fullnameEdit.getText();
 
+        usernameEdit.clear();
+        passwordEdit.clear();
+        fullnameEdit.clear();
+
         Staff tempStaff = staffListView1.getSelectionModel().getSelectedItem();
         tempStaff.updateCredidentials(tempUsername, tempPassword, "Sanitation", tempFullName);
 
@@ -407,6 +422,8 @@ public class RequestController {
         staffListView.getItems().clear();
         //staffListView.setItems(FXCollections.observableList(staffForCB));
         staffChoiceBox.getItems().clear();
+
+        staffForCB.clear();
         if (staffForCB.isEmpty() || staffForCB == null) {
             System.out.println("double fuck me");
         }
