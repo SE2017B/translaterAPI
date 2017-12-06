@@ -79,13 +79,13 @@
                                                 </Label>
                                                 <JFXButton fx:id="btncreate" onAction="#requestCreatePressed" prefHeight="50.0" prefWidth="150.0" text="Create" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                                                 <JFXButton fx:id="btncancel" onAction="#cancelPressed" prefHeight="50.0" prefWidth="150.0" text="Clear" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                                                <JFXDatePicker fx:id="dateMenu" defaultColor="#64fff0" onAction="#dateSelected" prefWidth="150.0" style="-fx: #ffffff;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                                <JFXDatePicker fx:id="dateMenu" defaultColor="#64fff0" prefWidth="150.0" style="-fx: #ffffff;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                                                 <Label text="Staff Member" GridPane.halignment="CENTER">
                                                     <font>
                                                         <Font size="18.0" />
                                                     </font>
                                                 </Label>
-                                                <JFXTimePicker fx:id="timeMenu" defaultColor="#34f8e4" onAction="#timeSelected" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                                <JFXTimePicker fx:id="timeMenu" defaultColor="#34f8e4" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                                                 <Label text="Addition Comments" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                                                     <font>
                                                         <Font size="18.0" />

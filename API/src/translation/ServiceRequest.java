@@ -87,7 +87,7 @@ public class ServiceRequest {
 
     @Override
     public String toString() {
-        String name = String.valueOf(requestID) + " Sanitation " + location + " " + time + " " + date;
+        String name = String.valueOf(requestID) + " " + location + " " + time + " " + date + " " + severity + " " + inputData;
         System.out.println(name);
         return name;
     }
