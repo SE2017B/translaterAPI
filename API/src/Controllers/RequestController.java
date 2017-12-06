@@ -270,6 +270,8 @@ public class RequestController {
     public void requestCreatePressed(ActionEvent e) {
         requestIDCount++;
         staffMember = staffChoiceBox.getSelectionModel().getSelectedItem();
+        //time = ((JFXTimePicker) e.getSource()).getValue().toString();
+        //date = ((JFXDatePicker) e.getSource()).getValue().toString();
         comments = txtAreaComments.getText();
         ServiceRequest serv;
         serv = new ServiceRequest(requestIDCount, location, time, date, staffMember, severity, comments);
