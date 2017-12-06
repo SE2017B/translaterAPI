@@ -237,7 +237,9 @@ public class RequestController {
     }
 
     public void displayFields(Staff newStaff) {
-        resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.findStaffMemRequests(newStaff)));
+        if(newStaff != null) {
+            resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.findStaffMemRequests(newStaff)));
+        }
     }
 
     @FXML
@@ -280,10 +282,8 @@ public class RequestController {
     @FXML
     void createStaffPressed(ActionEvent event) {
         staffId = staffDatabase.getStaffCounter() + 1;
-
         ArrayList<Staff> tempAL = new ArrayList<>();
         tempAL.addAll(staffForCB);
-
         Staff nStaff;
 
         nStaff = new Staff(usernameTxt.getText(), passwordTxt.getText(), "Sanitation", fullNametxt.getText(), Integer.toString(staffId));
@@ -291,17 +291,13 @@ public class RequestController {
         staffDatabase.addStaff(nStaff);
         staffChoiceBox.setItems(FXCollections.observableList(tempAL));
         staffResolveServiceChoiceBox.setItems(FXCollections.observableList(tempAL));
-
         staffListView1.getItems().clear();
         staffListView.getItems().clear();
-
         usernameTxt.clear();
         passwordTxt.clear();
         fullNametxt.clear();
-
         staffForCB.clear();
         staffForCB.addAll(tempAL);
-
         staffListView1.setItems(FXCollections.observableList(tempAL));
         staffListView.setItems(FXCollections.observableList(tempAL));
     }

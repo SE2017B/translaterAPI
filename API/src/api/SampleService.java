@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class SampleService implements ExportableServiceComponent {
     private final Stage primaryStage;
@@ -25,6 +27,14 @@ public class SampleService implements ExportableServiceComponent {
         SampleServicePreconditions.verifyWindowDimensions(windowLength, windowWidth);
         // TODO: Run other precondition checks here
         // All checks passed; spawn the window
+
+        try {
+            DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         nodeDatabase.deleteNodeTable();
         staffDatabase.deleteStaffTable();
         serviceDatabase.deleteRequestsTable();

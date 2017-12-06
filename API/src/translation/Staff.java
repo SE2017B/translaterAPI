@@ -103,9 +103,9 @@ public class Staff {
         staffDatabase.modifyStaff(this);
     }
 
-    public void addRequest(ServiceRequest newRequest) {
-        workload.put(newRequest.getRequestID(), newRequest);
-    }
+//    public void addRequest(ServiceRequest newRequest) {
+//        workload.put(newRequest.getRequestID(), newRequest);
+//    }
 
     public Collection<ServiceRequest> getAllRequest() {
         return workload.values();

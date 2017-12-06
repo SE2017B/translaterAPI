@@ -18,14 +18,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-
-        try {
-            DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        
         launch(args);
     }
 }

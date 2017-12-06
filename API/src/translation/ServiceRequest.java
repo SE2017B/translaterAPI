@@ -28,7 +28,7 @@ public class ServiceRequest {
         this.severity = severity;
         this.task = task;
         this.inputData = comments;
-        this.assignedPersonnel.addRequest(this);
+//        this.assignedPersonnel.addRequest(this);
     }
 
     //Getters and Setters
