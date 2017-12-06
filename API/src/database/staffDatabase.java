@@ -31,7 +31,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Delete staff table
     ///////////////////////////////////////////////////////////////////////////////
-    public void deleteStaffTable() {
+    public static void deleteStaffTable() {
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -59,7 +59,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Create a table for the Staff Members
     ///////////////////////////////////////////////////////////////////////////////
-    public void createStaffTable() {
+    public static void createStaffTable() {
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -95,7 +95,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Insert into staff table using a prepared statement from csv
     ///////////////////////////////////////////////////////////////////////////////
-    public void insertStaffFromCSV() {
+    public static void insertStaffFromCSV() {
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
@@ -333,9 +333,9 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Read from Staff CSV File and store columns in staff array lists
     ///////////////////////////////////////////////////////////////////////////////
-    public void readStaffCSV(String fname) {
+    public static void readStaffCSV(String fname) {
         int count = 0;
-        InputStream in = getClass().getResourceAsStream(fname);
+        InputStream in = Class.class.getResourceAsStream(fname);
         if(in == null){
             System.out.println("\n\n\nhelp\n\n\n");
         }
@@ -363,7 +363,7 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Write to a output Staff csv file (No Password Encryption)
     ///////////////////////////////////////////////////////////////////////////////
-    public void outputStaffCSV() {
+    public static void outputStaffCSV() {
         String outStaffFileName = "outputStaff.csv";
 
         try {

@@ -20,7 +20,7 @@ public class serviceDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Delete serviceRequests table
     ///////////////////////////////////////////////////////////////////////////////
-    public void deleteRequestsTable() {
+    public static void deleteRequestsTable() {
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -48,7 +48,7 @@ public class serviceDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Create a table for serviceRequests
     ///////////////////////////////////////////////////////////////////////////////
-    public void createServiceTable() {
+    public static void createServiceTable() {
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);

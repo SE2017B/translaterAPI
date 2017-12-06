@@ -34,32 +34,32 @@ public class SampleService implements ExportableServiceComponent {
             e.printStackTrace();
         }
 
-        new nodeDatabase().deleteNodeTable();
-        new staffDatabase().deleteStaffTable();
-        new serviceDatabase().deleteRequestsTable();
+        nodeDatabase.deleteNodeTable();
+        staffDatabase.deleteStaffTable();
+        serviceDatabase.deleteRequestsTable();
 
-        new nodeDatabase().createNodeTable();
-        new staffDatabase().createStaffTable();
-        new serviceDatabase().createServiceTable();
+        nodeDatabase.createNodeTable();
+        staffDatabase.createStaffTable();
+        serviceDatabase.createServiceTable();
 
-        new nodeDatabase().readNodeCSV("/csv/MapAnodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapBnodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapCnodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapDnodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapEnodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapFnodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapGnodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapHnodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapInodes.csv");
-        new nodeDatabase().readNodeCSV("/csv/MapWnodes.csv");
-        new nodeDatabase().insertNodesFromCSV();
+        nodeDatabase.readNodeCSV("/csv/MapAnodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapBnodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapCnodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapDnodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapEnodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapFnodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapGnodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapHnodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapInodes.csv");
+        nodeDatabase.readNodeCSV("/csv/MapWnodes.csv");
+        nodeDatabase.insertNodesFromCSV();
 
-        new staffDatabase().readStaffCSV("/csv/staffMembers.csv");
-        new staffDatabase().insertStaffFromCSV();
+        staffDatabase.readStaffCSV("/csv/staffMembers.csv");
+        staffDatabase.insertStaffFromCSV();
 
 
-        new nodeDatabase().outputNodesCSV();
-        new staffDatabase().outputStaffCSV();
+        nodeDatabase.outputNodesCSV();
+        staffDatabase.outputStaffCSV();
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
         RequestController.setLocation(destNodeID);
     }

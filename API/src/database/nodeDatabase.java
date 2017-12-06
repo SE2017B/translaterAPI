@@ -25,7 +25,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Delete nodes table
     ///////////////////////////////////////////////////////////////////////////////
-    public void deleteNodeTable() {
+    public static void deleteNodeTable() {
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
@@ -53,7 +53,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Create a table for the nodes
     ///////////////////////////////////////////////////////////////////////////////
-    public void createNodeTable() {
+    public static void createNodeTable() {
 
         System.out.println();
 
@@ -97,9 +97,9 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Read from Staff CSV File and store columns in staff array lists
     ///////////////////////////////////////////////////////////////////////////////
-    public void readNodeCSV(String fname) {
+    public static void readNodeCSV(String fname) {
         int count = 0;
-        InputStream in = getClass().getResourceAsStream(fname);
+        InputStream in = Class.class.getResourceAsStream(fname);
         if(in == null){
             System.out.println("\n\n\nNode help\n\n\n");
         }
@@ -128,7 +128,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Insert into nodes table using a prepared statement from csv
     ///////////////////////////////////////////////////////////////////////////////
-    public void insertNodesFromCSV() {
+    public static void insertNodesFromCSV() {
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
@@ -168,7 +168,7 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Write to a output Nodes csv file
     ///////////////////////////////////////////////////////////////////////////////
-    public void outputNodesCSV() {
+    public static void outputNodesCSV() {
         String outNodesFileName = "outputNodes.csv";
 
         try {
