@@ -1,6 +1,7 @@
 package database;
 
 import Node.Node;
+import translation.Staff;
 
 import java.io.*;
 import java.sql.*;
@@ -112,7 +113,8 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     // Read from Nodes CSV File and store columns in array lists
     ///////////////////////////////////////////////////////////////////////////////
-    public static void readNodeCSV(String fname) {
+    /*
+    public static void readNodeCSV (String fname) {
 
         File nodefile = new File(fname);
 
@@ -133,10 +135,38 @@ public class nodeDatabase {
             e.printStackTrace();
         }
     }
+    */
+    ///////////////////////////////////////////////////////////////////////////////
+    // Read from Staff CSV File and store columns in staff array lists
+    ///////////////////////////////////////////////////////////////////////////////
+    public void readNodeCSV(String fname) {
+        int count = 0;
+        InputStream in = getClass().getResourceAsStream(fname);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
+        try {
+
+            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+
+                String[] nodeValues = line.split(",");
+
+                if (count != 0) {
+                    nodeDatabase.allNodes.add(new Node(nodeValues[0], nodeValues[1], nodeValues[2], nodeValues[3], nodeValues[4], nodeValues[5], nodeValues[6], nodeValues[7], nodeValues[8]));
+
+                }
+                count++;
+            }
+            reader.close();
+            in.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     ///////////////////////////////////////////////////////////////////////////////
     // Insert into nodes table using a prepared statement from csv
     ///////////////////////////////////////////////////////////////////////////////
+
     public static void insertNodesFromCSV() {
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);

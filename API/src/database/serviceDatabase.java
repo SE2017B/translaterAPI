@@ -23,12 +23,11 @@ public class serviceDatabase {
     public static void deleteRequestsTable() {
 
         try {
-
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
-            ResultSet res = meta.getTables(null, null, "serviceRequests", null);
+            ResultSet res = meta.getTables(null, null, "SERVICEREQUESTS", null);
 
             Statement stmtDelete = conn.createStatement();
             String deleteServiceTable = ("DROP TABLE serviceRequests");
@@ -58,7 +57,7 @@ public class serviceDatabase {
             conn.setAutoCommit(false);
 
             DatabaseMetaData meta = conn.getMetaData();
-            ResultSet res = meta.getTables(null, null, "serviceRequests", null);
+            ResultSet res = meta.getTables(null, null, "SERVICEREQUESTS", null);
 
             //Add a new node table
             Statement stmtCreate = conn.createStatement();

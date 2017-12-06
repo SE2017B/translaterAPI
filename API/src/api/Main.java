@@ -26,28 +26,27 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        serviceDatabase.deleteRequestsTable();
         nodeDatabase.deleteNodeTable();
         staffDatabase.deleteStaffTable();
+        serviceDatabase.deleteRequestsTable();
 
         nodeDatabase.createNodeTable();
         staffDatabase.createStaffTable();
         serviceDatabase.createServiceTable();
 
-        nodeDatabase.readNodeCSV("API/src/csv/MapAnodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapBnodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapCnodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapDnodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapEnodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapFnodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapGnodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapHnodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapInodes.csv");
-        nodeDatabase.readNodeCSV("API/src/csv/MapWnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapAnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapBnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapCnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapDnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapEnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapFnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapGnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapHnodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapInodes.csv");
+        new nodeDatabase().readNodeCSV("/csv/MapWnodes.csv");
         nodeDatabase.insertNodesFromCSV();
 
-        //void sd = new staffDatabase().readStaffCSV("API/src/csv/MapAnodes.csv");
-
+        new staffDatabase().readStaffCSV("/csv/StaffMembers.csv");
         staffDatabase.insertStaffFromCSV();
 
         launch(args);

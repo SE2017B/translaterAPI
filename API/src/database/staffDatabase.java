@@ -339,20 +339,23 @@ public class staffDatabase {
     // Read from Staff CSV File and store columns in staff array lists
     ///////////////////////////////////////////////////////////////////////////////
     public void readStaffCSV(String fname) {
-
-        InputStream in = getClass().getResourceAsStream("/" + fname);
+        int count = 0;
+        InputStream in = getClass().getResourceAsStream(fname);
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
         try {
-            reader.readLine();
-            while (reader.readLine() != null) {
 
-                String[] staffValues = reader.readLine().split(",");
+            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
 
-                staffDatabase.allStaff.add(new Staff(staffValues[0], staffValues[1], staffValues[2], staffValues[3], Integer.valueOf(staffValues[4])));
+                String[] staffValues = line.split(",");
 
+                if (count != 0) {
+                    staffDatabase.allStaff.add(new Staff(staffValues[0], staffValues[1], staffValues[2], staffValues[3], Integer.parseInt(staffValues[4])));
+                }
+                count++;
             }
             reader.close();
+            in.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -383,6 +386,8 @@ public class staffDatabase {
             System.out.println();
             pw3.flush();
             pw3.close();
+            bw3.close();
+            fw3.close();
 
         } catch (IOException e) {
             e.printStackTrace();
