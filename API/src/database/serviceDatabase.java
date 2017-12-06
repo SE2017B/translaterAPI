@@ -50,8 +50,6 @@ public class serviceDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     public static void createServiceTable() {
 
-        System.out.println();
-
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
@@ -66,7 +64,7 @@ public class serviceDatabase {
                     "locationID VARCHAR(10)," +
                     "time VARCHAR(50)," +
                     "date VARCHAR(50)," +
-                    "staffID VARCHAR(50)," +
+                    "staffID INTEGER," +
                     "severity VARCHAR(10)," +
                     "comments VARCHAR(75)," +
                     "CONSTRAINT serviceRequests_PK PRIMARY KEY (requestID))");
@@ -106,9 +104,6 @@ public class serviceDatabase {
             addAnyService.setString(7, anyService.getInputData());
 
             addAnyService.executeUpdate();
-
-            //System.out.printf("Insert Staff Successful for staffID: %-5d\n", anyService.getRequestID());
-            //System.out.println();
 
             conn.commit();
 
@@ -212,17 +207,17 @@ public class serviceDatabase {
     public static ArrayList<ServiceRequest> findStaffMemRequests(Staff anyStaff) {
 
         ArrayList<ServiceRequest> resultServices = new ArrayList<>();
-        String anyUser = anyStaff.getUsername();
+        int anyID = anyStaff.getID();
 
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
             conn.getMetaData();
 
-            String staffMemServices = "SELECT * FROM serviceRequests WHERE username = ?";
+            String staffMemServices = "SELECT * FROM serviceRequests WHERE staffID = ?";
 
             PreparedStatement selectStaffServices = conn.prepareStatement(staffMemServices);
-            selectStaffServices.setString(1, anyUser);
+            selectStaffServices.setInt(1, anyID);
 
             ResultSet rsetStaffServices = selectStaffServices.executeQuery();
 

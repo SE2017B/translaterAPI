@@ -19,19 +19,6 @@ public class nodeDatabase {
     private static final String JDBC_URL_API = "jdbc:derby:hospitalAPIDB;create=true";
     private static Connection conn;
 
-    // Counters for # total count on each nodeType
-    private static int hallCounter;
-    private static int elevCounter;
-    private static int restCounter;
-    private static int staiCounter;
-    private static int deptCounter;
-    private static int labsCounter;
-    private static int infoCounter;
-    private static int confCounter;
-    private static int exitCounter;
-    private static int retlCounter;
-    private static int servCounter;
-
     // All nodes from the node table in hospitalMapDB
     static ArrayList<Node> allNodes = new ArrayList<>();
 
@@ -111,32 +98,6 @@ public class nodeDatabase {
     }
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Read from Nodes CSV File and store columns in array lists
-    ///////////////////////////////////////////////////////////////////////////////
-    /*
-    public static void readNodeCSV (String fname) {
-
-        File nodefile = new File(fname);
-
-        try {
-            Scanner inputStreamNodes = new Scanner(nodefile);
-            inputStreamNodes.nextLine();
-            while (inputStreamNodes.hasNext()) {
-
-                String nodeData = inputStreamNodes.nextLine();
-                String[] nodeValues = nodeData.split(",");
-
-                nodeDatabase.allNodes.add(new Node(nodeValues[0], nodeValues[1], nodeValues[2], nodeValues[3], nodeValues[4], nodeValues[5], nodeValues[6], nodeValues[7], nodeValues[8]));
-
-            }
-            inputStreamNodes.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    */
-    ///////////////////////////////////////////////////////////////////////////////
     // Read from Staff CSV File and store columns in staff array lists
     ///////////////////////////////////////////////////////////////////////////////
     public void readNodeCSV(String fname) {
@@ -163,10 +124,10 @@ public class nodeDatabase {
             e.printStackTrace();
         }
     }
+
     ///////////////////////////////////////////////////////////////////////////////
     // Insert into nodes table using a prepared statement from csv
     ///////////////////////////////////////////////////////////////////////////////
-
     public static void insertNodesFromCSV() {
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
