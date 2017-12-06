@@ -77,7 +77,6 @@ public class staffDatabase {
                     "fullname VARCHAR(30)," +
                     "ID INTEGER," +
                     "CONSTRAINT hospitalStaff_PK PRIMARY KEY (ID)," +
-                    "CONSTRAINT hospitalStaff_U1 UNIQUE (username)," +
                     "CONSTRAINT jobTitle CHECK (jobTitle IN ('Translator', 'Janitor', 'Chef', 'Food Delivery', 'Transport Staff', 'Sanitation'))," +
                     "CONSTRAINT ID_chk CHECK (ID > 0))");
 

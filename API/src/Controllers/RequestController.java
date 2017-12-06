@@ -48,7 +48,7 @@ public class RequestController {
     //private Service servSelect;
     private ServiceRequest reqServPls;
     //private CurrentServiceController currentServiceController;
-    private ArrayList<Staff> staffForCB = new ArrayList<Staff>();
+    private ArrayList<Staff> staffForCB;
 
     @FXML
     private JFXButton btncreate;
@@ -169,6 +169,7 @@ public class RequestController {
 
     @FXML
     public void initialize() {
+        staffForCB = new ArrayList<Staff>();
         staffForCB.addAll(staffDatabase.queryAllStaff());
         tasksList = new ArrayList<String>();
         tasksList.add("Clean Room");
@@ -186,7 +187,7 @@ public class RequestController {
         //todo check for label set up -> RESOLVE SERVICE
 
 
-        staffResolveServiceChoiceBox.valueProperty().addListener((v, oldValue, newValue) -> displayFields());
+        staffResolveServiceChoiceBox.valueProperty().addListener((v, oldValue, newValue) -> displayFields(newValue));
         staffListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Staff>() {
                                                                                  @Override
                                                                                  public void changed(ObservableValue<? extends Staff> observable, Staff oldValue, Staff newValue) {
@@ -209,6 +210,18 @@ public class RequestController {
                                                                                   }
                                                                               }
         );
+        resolveServiceListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ServiceRequest>() {
+                                                                                  @Override
+                                                                                  public void changed(ObservableValue<? extends ServiceRequest> observable, ServiceRequest oldValue, ServiceRequest newValue) {
+                                                                                      if (newValue != null) {
+                                                                                          lblSelectedService.setText(newValue.getTask());
+                                                                                          lblSelectedLocation.setText(newValue.getLocation().toString());
+                                                                                          lblSelectedDT.setText(newValue.getDate() + " | " + newValue.getTime());
+                                                                                          lblSelectedAdditionalInfo.setText(newValue.getSeverity());
+                                                                                      }
+                                                                                  }
+                                                                              }
+        );
         staffListView.setItems(FXCollections.observableList(staffForCB));
         staffListView1.setItems(FXCollections.observableList(staffForCB));
         staffResolveServiceChoiceBox.setItems(FXCollections.observableList(staffForCB));
@@ -223,6 +236,7 @@ public class RequestController {
 
 
         staffChoiceBox.getItems().addAll(staffForCB);
+
 
         //todo when tasks made finish this
         //taskChoiceBox set up
@@ -243,7 +257,9 @@ public class RequestController {
     public void resolveServicePressed(ActionEvent e) {
 
         //todo TEST
+        serviceDatabase.deleteService(resolveServiceListView.getSelectionModel().getSelectedItem());
         resolveServiceListView.getItems().removeAll(resolveServiceListView.getSelectionModel().getSelectedItems());
+
         System.out.println("Requests " + (resolveServiceListView.getSelectionModel().getSelectedItems()) + "resolved");
 
         lblSelectedService.setText("Request");
@@ -261,9 +277,10 @@ public class RequestController {
         }
     }
 
-    public void displayFields() {
-        //todo show on list based on the satff memeber
-        resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.findStaffMemRequests(staffChoiceBox.getSelectionModel().getSelectedItem())));
+    public void displayFields(Staff newStaff) {
+        //todo show on list based on the satff member
+
+        resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.findStaffMemRequests(newStaff)));
     }
 
     @FXML
@@ -273,10 +290,11 @@ public class RequestController {
         //time = ((JFXTimePicker) e.getSource()).getValue().toString();
         //date = ((JFXDatePicker) e.getSource()).getValue().toString();
         comments = txtAreaComments.getText();
+        String task = taskChoiceBox.getSelectionModel().getSelectedItem();
         ServiceRequest serv;
-        serv = new ServiceRequest(requestIDCount, location, time, date, staffMember, severity, comments);
+        serv = new ServiceRequest(requestIDCount, location, time, date, staffMember, task, severity, comments);
         serviceDatabase.addService(serv);
-        resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.queryAllServices()));
+       // resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.queryAllServices()));
 
         System.out.println("request submitted");
         // Clear all fields
@@ -290,25 +308,17 @@ public class RequestController {
     }
 
     public void cancelPressed(ActionEvent e) {
-//        //todo TEST
-//        languageChoiceBox.setItems(FXCollections.observableList(new ArrayList<String>()));
-//        languageChoiceBox.setValue(null);
-//
-        //severityMenu = ((MenuItem) e.getSource()).getText().toString();
+
         staffChoiceBox.setItems(FXCollections.observableList(staffForCB));
         taskChoiceBox.setItems(FXCollections.observableList(tasksList));
         timeMenu.getEditor().clear();
         dateMenu.getEditor().clear();
         txtAreaComments.clear();
         severityMenu.setText("");
-
-
-        System.out.println("cancel pressed");
-
     }
 
     public void timeSelected(ActionEvent e) {
-        System.out.println("Time selescted");
+        System.out.println("Time Selected");
         time = ((JFXTimePicker) e.getSource()).getValue().toString();
     }
 
@@ -319,7 +329,7 @@ public class RequestController {
 
     @FXML
     void createStaffPressed(ActionEvent event) {
-//
+
         //todo ADJUST FOR API
         staffId = staffDatabase.getStaffCounter() + 1;
 
@@ -333,24 +343,25 @@ public class RequestController {
         nStaff = new Staff(usernameTxt.getText(), passwordTxt.getText(), "Sanitation", fullNametxt.getText(), Integer.toString(staffId));
         tempAL.add(nStaff);
         staffDatabase.addStaff(nStaff);
-        staffResolveServiceChoiceBox.getItems().clear();
+        staffChoiceBox.setItems(FXCollections.observableList(tempAL));
+        staffResolveServiceChoiceBox.setItems(FXCollections.observableList(tempAL));
+       // staffResolveServiceChoiceBox.getItems().clear();
         staffListView1.getItems().clear();
         staffListView.getItems().clear();
         //staffListView.setItems(FXCollections.observableList(staffForCB));
-        staffChoiceBox.getItems().clear();
+       // staffChoiceBox.getItems().clear();
 
         usernameTxt.clear();
         passwordTxt.clear();
         fullNametxt.clear();
 
         staffForCB.clear();
+        staffForCB.addAll(tempAL);
 
-        staffResolveServiceChoiceBox.setItems(FXCollections.observableList(tempAL));
         staffListView1.setItems(FXCollections.observableList(tempAL));
         staffListView.setItems(FXCollections.observableList(tempAL));
         //staffListView.setItems(FXCollections.observableList(staffForCB));
-        staffChoiceBox.setItems(FXCollections.observableList(tempAL));
-        staffForCB.addAll(tempAL);
+
 //
 //
 //        staffDatabase.incStaffCounter();
@@ -435,7 +446,7 @@ public class RequestController {
 
         staffForCB.clear();
         if (staffForCB.isEmpty() || staffForCB == null) {
-            System.out.println("double fuck me");
+            System.out.println("Error");
         }
         staffListView.setItems(FXCollections.observableList(tempAL));
         staffListView1.setItems(FXCollections.observableList(tempAL));

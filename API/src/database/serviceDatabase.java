@@ -65,6 +65,7 @@ public class serviceDatabase {
                     "time VARCHAR(50)," +
                     "date VARCHAR(50)," +
                     "staffID INTEGER," +
+                    "task VARCHAR(30)," +
                     "severity VARCHAR(10)," +
                     "comments VARCHAR(75)," +
                     "CONSTRAINT serviceRequests_PK PRIMARY KEY (requestID))");
@@ -91,15 +92,16 @@ public class serviceDatabase {
             conn.setAutoCommit(false);
             conn.getMetaData();
 
-            PreparedStatement addAnyService = conn.prepareStatement("INSERT INTO serviceRequests VALUES (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement addAnyService = conn.prepareStatement("INSERT INTO serviceRequests VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
             addAnyService.setInt(1, anyService.getRequestID());
             addAnyService.setString(2, anyService.getLocation().getID());
             addAnyService.setString(3, anyService.getTime());
             addAnyService.setString(4, anyService.getDate());
-            addAnyService.setString(5, anyService.getAssignedPersonnel().getID());
-            addAnyService.setString(6, anyService.getSeverity());
-            addAnyService.setString(7, anyService.getInputData());
+            addAnyService.setInt(5, anyService.getAssignedPersonnel().getID());
+            addAnyService.setString(6, anyService.getTask());
+            addAnyService.setString(7, anyService.getSeverity());
+            addAnyService.setString(8, anyService.getInputData());
 
             addAnyService.executeUpdate();
 
@@ -163,6 +165,7 @@ public class serviceDatabase {
             String strLocID;
             String strTime;
             String strDate;
+            String task;
             String strStaffID;
             String strSeverity;
             String strComments;
@@ -174,13 +177,14 @@ public class serviceDatabase {
                 strTime = rsetAllServices.getString("time");
                 strDate = rsetAllServices.getString("date");
                 strStaffID = rsetAllServices.getString("staffID");
+                task =  rsetAllServices.getString("task");
                 strSeverity = rsetAllServices.getString("severity");
                 strComments = rsetAllServices.getString("comments");
 
                 Node someNode = nodeDatabase.findANode(strLocID);
                 Staff someStaff = staffDatabase.findAStaff(strStaffID);
 
-                resultServices.add(new ServiceRequest(intServiceID, someNode, strTime, strDate, someStaff, strSeverity, strComments));
+                resultServices.add(new ServiceRequest(intServiceID, someNode, strTime, strDate, someStaff, task, strSeverity, strComments));
 
             } // End While
 
@@ -224,6 +228,7 @@ public class serviceDatabase {
             String strTime;
             String strDate;
             String strStaffID;
+            String task;
             String strSeverity;
             String strComments;
 
@@ -235,12 +240,13 @@ public class serviceDatabase {
                 strTime = rsetStaffServices.getString("time");
                 strDate = rsetStaffServices.getString("date");
                 strStaffID = rsetStaffServices.getString("staffID");
+                task = rsetStaffServices.getString("task");
                 strSeverity = rsetStaffServices.getString("severity");
                 strComments = rsetStaffServices.getString("comments");
 
                 Staff someStaff = staffDatabase.findAStaff(strStaffID);
                 Node someNode = nodeDatabase.findANode(strLocID);
-                resultServices.add(new ServiceRequest(intServiceID, someNode, strTime, strDate, someStaff, strSeverity, strComments));
+                resultServices.add(new ServiceRequest(intServiceID, someNode, strTime, strDate, someStaff, task, strSeverity, strComments));
 
             } // End While
 

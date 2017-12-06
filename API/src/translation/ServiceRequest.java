@@ -18,15 +18,15 @@ public class ServiceRequest {
     private Staff assignedPersonnel;
     private String inputData;
     private String severity;
-
-    public ServiceRequest(int requestID, Node location, String time, String date, Staff assignedPersonnel, String severity, String comments) {
+    private  String task;
+    public ServiceRequest(int requestID, Node location, String time, String date, Staff assignedPersonnel, String task,String severity, String comments) {
         this.requestID = requestID;
         this.location = location;
         this.time = time;
         this.date = date;
         this.assignedPersonnel = assignedPersonnel;
         this.severity = severity;
-
+        this.task = task;
         this.inputData = comments;
         this.assignedPersonnel.addRequest(this);
     }
@@ -85,9 +85,14 @@ public class ServiceRequest {
         this.severity = severity;
     }
 
+    public String getTask() {
+        return task;
+    }
+
+
     @Override
     public String toString() {
-        String name = String.valueOf(requestID) + " " + location + " " + time + " " + date + " " + severity + " " + inputData;
+        String name = String.valueOf(requestID) + " " + location + " " + severity + " " + inputData;
         System.out.println(name);
         return name;
     }
