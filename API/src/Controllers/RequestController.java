@@ -279,6 +279,13 @@ public class RequestController {
         resolveServiceListView.setItems(FXCollections.observableList(serviceDatabase.queryAllServices()));
 
         System.out.println("request submitted");
+        // Clear all fields
+        staffChoiceBox.setItems(FXCollections.observableList(staffForCB));
+        taskChoiceBox.setItems(FXCollections.observableList(tasksList));
+        timeMenu.getEditor().clear();
+        dateMenu.getEditor().clear();
+        txtAreaComments.clear();
+        severityMenu.setText("");
 
     }
 
@@ -288,9 +295,12 @@ public class RequestController {
 //        languageChoiceBox.setValue(null);
 //
         //severityMenu = ((MenuItem) e.getSource()).getText().toString();
+        staffChoiceBox.setItems(FXCollections.observableList(staffForCB));
+        taskChoiceBox.setItems(FXCollections.observableList(tasksList));
         timeMenu.getEditor().clear();
         dateMenu.getEditor().clear();
         txtAreaComments.clear();
+        severityMenu.setText("");
 
 
         System.out.println("cancel pressed");

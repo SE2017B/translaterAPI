@@ -28,7 +28,6 @@ public class nodeDatabase {
     public static void deleteNodeTable() {
 
         try {
-
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
@@ -87,8 +86,6 @@ public class nodeDatabase {
             System.out.println("Create Nodes table Successful!");
 
             conn.commit();
-            System.out.println();
-
             stmtCreate1.close();
             conn.close();
 

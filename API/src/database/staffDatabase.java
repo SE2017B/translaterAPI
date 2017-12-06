@@ -34,7 +34,6 @@ public class staffDatabase {
     public static void deleteStaffTable() {
 
         try {
-
             conn = DriverManager.getConnection(JDBC_URL_API);
             conn.setAutoCommit(false);
 
@@ -86,8 +85,6 @@ public class staffDatabase {
             System.out.println("Create Staff table Successful!");
 
             conn.commit();
-            System.out.println();
-
             stmtCreateStaffTable.close();
             conn.close();
 
@@ -232,8 +229,6 @@ public class staffDatabase {
             System.out.println(e.getMessage());
         }
         int indexOf = allStaff.indexOf(anyStaff);
-        System.out.println("ID: " + anyStaff.getID());
-        System.out.println("indexOf: " + indexOf);
         allStaff.remove(indexOf);
     }
 

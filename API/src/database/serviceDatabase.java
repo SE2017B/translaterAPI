@@ -73,8 +73,6 @@ public class serviceDatabase {
             System.out.println("Create serviceRequests table Successful!");
 
             conn.commit();
-            System.out.println();
-
             stmtCreate.close();
             conn.close();
 
