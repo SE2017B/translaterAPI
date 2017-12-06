@@ -98,7 +98,7 @@ public class serviceDatabase {
             addAnyService.setString(2, anyService.getLocation().getID());
             addAnyService.setString(3, anyService.getTime());
             addAnyService.setString(4, anyService.getDate());
-            addAnyService.setInt(5, anyService.getAssignedPersonnel().getID());
+            addAnyService.setString(5, anyService.getAssignedPersonnel().getID());
             addAnyService.setString(6, anyService.getTask());
             addAnyService.setString(7, anyService.getSeverity());
             addAnyService.setString(8, anyService.getInputData());
