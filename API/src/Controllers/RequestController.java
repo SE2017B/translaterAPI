@@ -378,6 +378,7 @@ public class RequestController {
 
     @FXML
     void logoutPressed(ActionEvent event) {
+        nodeDatabase.
         ((Stage) cancelStaffButton.getScene().getWindow()).close();
     }
 }

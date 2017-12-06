@@ -20,7 +20,7 @@ public class nodeDatabase {
     private static Connection conn;
 
     // All nodes from the node table in hospitalMapDB
-    static ArrayList<Node> allNodes = new ArrayList<>();
+    public static ArrayList<Node> allNodes = new ArrayList<>();
 
     ///////////////////////////////////////////////////////////////////////////////
     // Delete nodes table

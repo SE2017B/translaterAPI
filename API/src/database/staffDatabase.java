@@ -26,7 +26,7 @@ public class staffDatabase {
     }
 
     // All staff members from the staff table in hospitalStaffDB
-    static ArrayList<Staff> allStaff = new ArrayList<>();
+    public static ArrayList<Staff> allStaff = new ArrayList<>();
 
     ///////////////////////////////////////////////////////////////////////////////
     // Delete staff table
