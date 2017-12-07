@@ -201,6 +201,7 @@ public class nodeDatabase {
     // Query all nodes from the node table
     ///////////////////////////////////////////////////////////////////////////////
     public static Node findANode(String anyNodeID) {
+        System.out.println("anyNodeID: " + anyNodeID);
         Node resultNode = null;
         try {
             conn = DriverManager.getConnection(JDBC_URL_API);
