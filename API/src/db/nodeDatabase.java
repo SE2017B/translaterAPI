@@ -97,6 +97,9 @@ public class nodeDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     public static void readNodeCSV(String fname) {
         int count = 0;
+        if (allNodes != null || allNodes.isEmpty()) {
+            allNodes.clear();
+        }
         InputStream in = Class.class.getResourceAsStream(fname);
         if(in == null){
             System.out.println("Error: Could not find file specified.");
@@ -136,7 +139,7 @@ public class nodeDatabase {
             PreparedStatement insertNode = conn.prepareStatement("INSERT INTO nodes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             for (int j = 0; j < allNodes.size(); j++) {
-                System.out.println("ID: " + allNodes.get(j).getID() + " LongName: " + nodeDatabase.allNodes.get(j).getLongName());
+                //System.out.println("ID: " + allNodes.get(j).getID() + " LongName: " + nodeDatabase.allNodes.get(j).getLongName());
 
                 insertNode.setString(1, allNodes.get(j).getID());
                 insertNode.setInt(2, allNodes.get(j).getX());

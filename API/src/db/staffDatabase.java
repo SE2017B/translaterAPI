@@ -320,6 +320,9 @@ public class staffDatabase {
     ///////////////////////////////////////////////////////////////////////////////
     public static void readStaffCSV(String fname) {
         int count = 0;
+        if (allStaff != null || allStaff.isEmpty()) {
+            allStaff.clear();
+        }
         InputStream in = Class.class.getResourceAsStream(fname);
         if(in == null){
             System.out.println("Error: Could not find file specified");
