@@ -110,14 +110,12 @@ public class staffDatabase {
                 insertStaff.setString(3, allStaff.get(j).getJobTitle());
                 insertStaff.setString(4, allStaff.get(j).getFullName());
                 insertStaff.setString(5, allStaff.get(j).getID());
-
                 getStaffCounter();
-
                 insertStaff.executeUpdate();
             }
 
+
             conn.commit();
-            System.out.println();
 
             insertStaff.close();
             conn.close();
@@ -146,9 +144,6 @@ public class staffDatabase {
             addAnyStaff.setString(5, anyStaff.getID());
 
             addAnyStaff.executeUpdate();
-
-//            System.out.printf("Insert Staff Successful for staffID: %-5d\n", anyStaff.getID());
-//            System.out.println();
 
             conn.commit();
 
@@ -187,8 +182,6 @@ public class staffDatabase {
             modAddAnyStaff.setString(4, anyStaff.getFullName());
             modAddAnyStaff.setString(5, anyStaff.getID());
 
-            System.out.println("Update Staff Member Successful!");
-
             conn.commit();
 
             modAddAnyStaff.close();
@@ -217,8 +210,6 @@ public class staffDatabase {
             deleteAnyStaff.setString(1, anyStaffID);
             // execute the delete statement
             deleteAnyStaff.executeUpdate();
-
-            System.out.println("Delete Staff Member Successful!");
 
             conn.commit();
             deleteAnyStaff.close();
@@ -280,7 +271,7 @@ public class staffDatabase {
     }
 
     ///////////////////////////////////////////////////////////////////////////////
-    // Query all nodes from the node table
+    // Find a staff member from the staff table
     ///////////////////////////////////////////////////////////////////////////////
     public static Staff findAStaff(String anyStaffID) {
         Staff resultStaff = null;
@@ -337,7 +328,7 @@ public class staffDatabase {
         int count = 0;
         InputStream in = Class.class.getResourceAsStream(fname);
         if(in == null){
-            System.out.println("\n\n\nhelp\n\n\n");
+            System.out.println("Error");
         }
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 

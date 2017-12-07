@@ -99,7 +99,7 @@ public class nodeDatabase {
         int count = 0;
         InputStream in = Class.class.getResourceAsStream(fname);
         if(in == null){
-            System.out.println("\n\n\nNode help\n\n\n");
+            System.out.println("Error: Could not find file specified.");
         }
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
@@ -111,7 +111,6 @@ public class nodeDatabase {
 
                 if (count != 0) {
                     nodeDatabase.allNodes.add(new Node(nodeValues[0], nodeValues[1], nodeValues[2], nodeValues[3], nodeValues[4], nodeValues[5], nodeValues[6], nodeValues[7], nodeValues[8]));
-                    System.out.println("Read Success!");
                 }
                 count++;
             }
@@ -136,7 +135,6 @@ public class nodeDatabase {
 
             PreparedStatement insertNode = conn.prepareStatement("INSERT INTO nodes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-
             for (int j = 0; j < allNodes.size(); j++) {
 
                 insertNode.setString(1, allNodes.get(j).getID());
@@ -150,11 +148,10 @@ public class nodeDatabase {
                 insertNode.setString(9, nodeDatabase.allNodes.get(j).getTeam());
 
                 insertNode.executeUpdate();
+
             }
 
             conn.commit();
-            System.out.println("HH");
-
             insertNode.close();
             conn.close();
 
@@ -207,7 +204,6 @@ public class nodeDatabase {
             conn.setAutoCommit(false);
             conn.getMetaData();
 
-            //Statement selectANode = conn.createStatement();
             String aNode = "SELECT * FROM NODES WHERE nodeID = ?";
 
             PreparedStatement selectANode = conn.prepareStatement(aNode);

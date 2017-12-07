@@ -34,9 +34,6 @@ public class SanitationService implements ExportableServiceComponent {
             e.printStackTrace();
         }
 
-        System.out.println("\n\n\n\nhelp me\n\n\n\n");
-
-
         nodeDatabase.deleteNodeTable();
         staffDatabase.deleteStaffTable();
         serviceDatabase.deleteRequestsTable();
@@ -44,24 +41,22 @@ public class SanitationService implements ExportableServiceComponent {
         nodeDatabase.createNodeTable();
         staffDatabase.createStaffTable();
         serviceDatabase.createServiceTable();
+        if((nodeDatabase.allNodes == null || nodeDatabase.allNodes.isEmpty())&&(staffDatabase.allStaff == null || staffDatabase.allStaff.isEmpty())) {
+            nodeDatabase.readNodeCSV("/rez/MapAnodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapBnodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapCnodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapDnodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapEnodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapFnodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapGnodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapHnodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapInodes.csv");
+            nodeDatabase.readNodeCSV("/rez/MapWnodes.csv");
+            nodeDatabase.insertNodesFromCSV();
 
-        nodeDatabase.readNodeCSV("/rez/MapAnodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapBnodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapCnodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapDnodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapEnodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapFnodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapGnodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapHnodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapInodes.csv");
-        nodeDatabase.readNodeCSV("/rez/MapWnodes.csv");
-        nodeDatabase.insertNodesFromCSV();
-
-        staffDatabase.readStaffCSV("/rez/staffMembers.csv");
-        staffDatabase.insertStaffFromCSV();
-
-        System.out.println("\n\n\n\nhelp me\n\n\n\n");
-
+            staffDatabase.readStaffCSV("/rez/staffMembers.csv");
+            staffDatabase.insertStaffFromCSV();
+        }
 //        nodeDatabase.outputNodesCSV();
 //        staffDatabase.outputStaffCSV();
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
@@ -76,21 +71,12 @@ public class SanitationService implements ExportableServiceComponent {
             System.out.println(e.getMessage());
             return;
         }
-//        RequestController mySC = new RequestController();
-//        mySC.set
 
         primaryStage.setTitle("Make New Translation Request");
-        System.out.println("2");
         primaryStage.setScene(new Scene(root, windowWidth, windowLength));
-        System.out.println("3");
         primaryStage.setX(xcoord);
-        System.out.println("4");
         primaryStage.setY(ycoord);
-        System.out.println("5");
         primaryStage.show();
-        System.out.println("6");
-//        RequestController.onShow();
-//        RequestController.init();
     }
 
     public static SanitationService newInstance(final Stage primaryStage) {
