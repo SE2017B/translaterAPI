@@ -41,7 +41,7 @@ public class SanitationService implements ExportableServiceComponent {
         nodeDatabase.createNodeTable();
         staffDatabase.createStaffTable();
         serviceDatabase.createServiceTable();
-        if((nodeDatabase.allNodes == null || nodeDatabase.allNodes.isEmpty())&&(staffDatabase.allStaff == null || staffDatabase.allStaff.isEmpty())) {
+        //if((nodeDatabase.allNodes == null || nodeDatabase.allNodes.isEmpty())&&(staffDatabase.allStaff == null || staffDatabase.allStaff.isEmpty())) {
             nodeDatabase.readNodeCSV("/rez/MapAnodes.csv");
             nodeDatabase.readNodeCSV("/rez/MapBnodes.csv");
             nodeDatabase.readNodeCSV("/rez/MapCnodes.csv");
@@ -52,11 +52,13 @@ public class SanitationService implements ExportableServiceComponent {
             nodeDatabase.readNodeCSV("/rez/MapHnodes.csv");
             nodeDatabase.readNodeCSV("/rez/MapInodes.csv");
             nodeDatabase.readNodeCSV("/rez/MapWnodes.csv");
+            nodeDatabase.queryAllNodes();
             nodeDatabase.insertNodesFromCSV();
 
             staffDatabase.readStaffCSV("/rez/staffMembers.csv");
+            staffDatabase.queryStaff();
             staffDatabase.insertStaffFromCSV();
-        }
+        //}
 //        nodeDatabase.outputNodesCSV();
 //        staffDatabase.outputStaffCSV();
         showServiceWindow(xcoord, ycoord, windowWidth, windowLength);

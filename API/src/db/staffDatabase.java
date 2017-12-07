@@ -114,9 +114,7 @@ public class staffDatabase {
                 insertStaff.executeUpdate();
             }
 
-
             conn.commit();
-
             insertStaff.close();
             conn.close();
 
@@ -146,9 +144,7 @@ public class staffDatabase {
             addAnyStaff.executeUpdate();
 
             conn.commit();
-
             allStaff.add(new Staff(anyStaff.getUsername(), anyStaff.getPassword(), anyStaff.getJobTitle(), anyStaff.getFullName(), anyStaff.getID()));
-
             addAnyStaff.close();
             conn.close();
 
@@ -183,7 +179,6 @@ public class staffDatabase {
             modAddAnyStaff.setString(5, anyStaff.getID());
 
             conn.commit();
-
             modAddAnyStaff.close();
             conn.close();
 
@@ -308,8 +303,6 @@ public class staffDatabase {
             } // End While
 
             conn.commit();
-            System.out.println();
-
             rsetAStaff.close();
             selectAStaff.close();
             conn.close();
@@ -328,7 +321,7 @@ public class staffDatabase {
         int count = 0;
         InputStream in = Class.class.getResourceAsStream(fname);
         if(in == null){
-            System.out.println("Error");
+            System.out.println("Error: Could not find file specified");
         }
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
@@ -372,7 +365,6 @@ public class staffDatabase {
                         staffDatabase.allStaff.get(j).getID()
                 );
             }
-            System.out.println();
             pw3.flush();
             pw3.close();
             bw3.close();
@@ -382,5 +374,52 @@ public class staffDatabase {
             e.printStackTrace();
         }
     }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Query all staff members from the staff table
+    ///////////////////////////////////////////////////////////////////////////////
+    public static void queryStaff() {
+        try {
+            conn = DriverManager.getConnection(JDBC_URL_API);
+            conn.setAutoCommit(false);
+            conn.getMetaData();
+
+            Statement selectAllStaff = conn.createStatement();
+            String allStaff = "SELECT * FROM hospitalStaff";
+            ResultSet rsetAllStaff = selectAllStaff.executeQuery(allStaff);
+
+            String strUsername;
+            String strPW;
+            String strTitle;
+            String strFullname;
+            Integer intStaffID;
+
+            System.out.println("");
+            System.out.printf("%-65s %-65s %-30s %-65s %-20s\n", "staffID", "password", "jobTitle", "fullName", "ID");
+
+            //Process the results
+            while (rsetAllStaff.next()) {
+                strUsername = rsetAllStaff.getString("username");
+                strPW = rsetAllStaff.getString("password");
+                strTitle = rsetAllStaff.getString("jobTitle");
+                strFullname = rsetAllStaff.getString("fullName");
+                intStaffID = rsetAllStaff.getInt("ID");
+
+                System.out.printf("%-65s %-65s %-30s %-65s %-20d\n", strUsername, strPW, strTitle, strFullname, intStaffID);
+            } // End While
+
+            conn.commit();
+            System.out.println();
+
+            rsetAllStaff.close();
+            selectAllStaff.close();
+            conn.close();
+
+        } // end try
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 

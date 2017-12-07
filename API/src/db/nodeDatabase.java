@@ -185,7 +185,6 @@ public class nodeDatabase {
                         nodeDatabase.allNodes.get(j).getTeam()
                 );
             }
-            System.out.println();
             pw1.flush();
             pw1.close();
 
@@ -238,8 +237,6 @@ public class nodeDatabase {
             } // End While
 
             conn.commit();
-            System.out.println();
-
             rsetANode.close();
             selectANode.close();
             conn.close();
@@ -249,5 +246,58 @@ public class nodeDatabase {
             e.printStackTrace();
         }
         return resultNode;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Query all nodes from the node table
+    ///////////////////////////////////////////////////////////////////////////////
+    public static void queryAllNodes() {
+        //Node resultNode = null;
+        try {
+            conn = DriverManager.getConnection(JDBC_URL_API);
+            conn.setAutoCommit(false);
+            conn.getMetaData();
+
+            Statement statAllNode = conn.createStatement();
+            String strAllNode = "SELECT * FROM NODES";
+            ResultSet rsetANode = statAllNode.executeQuery(strAllNode);
+
+            String strNodeID;
+            String strXCoord;
+            String strYCoord;
+            String strFloor;
+            String strBuilding;
+            String strNodeType;
+            String strLongName;
+            String strShortName;
+            String strTeamAssigned;
+
+            System.out.println("");
+            System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-50s %-30s %-20s\n", "nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName", "teamAssigned");
+
+            //Process the results
+            while (rsetANode.next()) {
+                strNodeID = rsetANode.getString("nodeID");
+                strXCoord = rsetANode.getString("xcoord");
+                strYCoord = rsetANode.getString("ycoord");
+                strFloor = rsetANode.getString("floor");
+                strBuilding = rsetANode.getString("building");
+                strNodeType = rsetANode.getString("nodeType");
+                strLongName = rsetANode.getString("longName");
+                strShortName = rsetANode.getString("shortName");
+                strTeamAssigned = rsetANode.getString("teamAssigned");
+
+                System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-50s %-30s %-20s\n", strNodeID, strXCoord, strYCoord, strFloor, strBuilding, strNodeType, strLongName, strShortName, strTeamAssigned);
+            } // End While
+
+            conn.commit();
+            rsetANode.close();
+            statAllNode.close();
+            conn.close();
+
+        } // end try
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

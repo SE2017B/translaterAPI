@@ -106,7 +106,6 @@ public class serviceDatabase {
             addAnyService.executeUpdate();
 
             conn.commit();
-
             addAnyService.close();
             conn.close();
 
@@ -251,8 +250,6 @@ public class serviceDatabase {
             } // End While
 
             conn.commit();
-            System.out.println();
-
             rsetStaffServices.close();
             selectStaffServices.close();
             conn.close();
