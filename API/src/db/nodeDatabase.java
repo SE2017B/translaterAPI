@@ -136,6 +136,7 @@ public class nodeDatabase {
             PreparedStatement insertNode = conn.prepareStatement("INSERT INTO nodes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             for (int j = 0; j < allNodes.size(); j++) {
+                System.out.println("ID: " + allNodes.get(j).getID() + " LongName: " + nodeDatabase.allNodes.get(j).getLongName());
 
                 insertNode.setString(1, allNodes.get(j).getID());
                 insertNode.setInt(2, allNodes.get(j).getX());

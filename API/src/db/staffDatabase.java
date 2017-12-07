@@ -105,6 +105,7 @@ public class staffDatabase {
 
             for (int j = 0; j < allStaff.size(); j++) {
 
+                System.out.println("ID: " + allStaff.get(j).getID() + " Username: " + allStaff.get(j).getUsername());
                 insertStaff.setString(1, allStaff.get(j).getUsername());
                 insertStaff.setString(2, allStaff.get(j).getPassword());
                 insertStaff.setString(3, allStaff.get(j).getJobTitle());
