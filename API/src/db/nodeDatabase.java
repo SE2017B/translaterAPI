@@ -113,6 +113,8 @@ public class nodeDatabase {
                 String[] nodeValues = line.split(",");
 
                 if (count != 0) {
+                    System.out.println("");
+                    System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s ", nodeValues[0], nodeValues[1], nodeValues[2], nodeValues[3], nodeValues[4], nodeValues[5], nodeValues[6], nodeValues[7], nodeValues[8]);
                     nodeDatabase.allNodes.add(new Node(nodeValues[0], nodeValues[1], nodeValues[2], nodeValues[3], nodeValues[4], nodeValues[5], nodeValues[6], nodeValues[7], nodeValues[8]));
                 }
                 count++;
@@ -139,7 +141,7 @@ public class nodeDatabase {
             PreparedStatement insertNode = conn.prepareStatement("INSERT INTO nodes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             for (int j = 0; j < allNodes.size(); j++) {
-                //System.out.println("ID: " + allNodes.get(j).getID() + " LongName: " + nodeDatabase.allNodes.get(j).getLongName());
+                System.out.println("ID: " + allNodes.get(j).getID() + " LongName: " + nodeDatabase.allNodes.get(j).getLongName());
 
                 insertNode.setString(1, allNodes.get(j).getID());
                 insertNode.setInt(2, allNodes.get(j).getX());
@@ -168,7 +170,7 @@ public class nodeDatabase {
     // Write to a output Nodes csv file
     ///////////////////////////////////////////////////////////////////////////////
     public static void outputNodesCSV() {
-        String outNodesFileName = "outputNodes.csv";
+        String outNodesFileName = "allNodes.csv";
 
         try {
             FileWriter fw1 = new FileWriter(outNodesFileName, false);
@@ -215,6 +217,8 @@ public class nodeDatabase {
 
             ResultSet rsetANode = selectANode.executeQuery();
 
+            System.out.println("Almost");
+
             String strNodeID;
             String strXCoord;
             String strYCoord;
@@ -227,6 +231,7 @@ public class nodeDatabase {
 
             //Process the results
             while (rsetANode.next()) {
+                System.out.println("YAY");
                 strNodeID = rsetANode.getString("nodeID");
                 strXCoord = rsetANode.getString("xcoord");
                 strYCoord = rsetANode.getString("ycoord");
@@ -237,6 +242,7 @@ public class nodeDatabase {
                 strShortName = rsetANode.getString("shortName");
                 strTeamAssigned = rsetANode.getString("teamAssigned");
 
+                System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s ", strNodeID, strXCoord, strYCoord, strFloor, strBuilding, strNodeType, strLongName, strShortName, strTeamAssigned);
                 resultNode = new Node(strNodeID, strXCoord, strYCoord, strFloor, strBuilding, strNodeType, strLongName, strShortName, strTeamAssigned);
 
             } // End While

@@ -41,31 +41,22 @@ public class SanitationService implements ExportableServiceComponent {
         nodeDatabase.createNodeTable();
         staffDatabase.createStaffTable();
         serviceDatabase.createServiceTable();
-        //if((nodeDatabase.allNodes == null || nodeDatabase.allNodes.isEmpty())&&(staffDatabase.allStaff == null || staffDatabase.allStaff.isEmpty())) {
-            nodeDatabase.readNodeCSV("/rez/MapAnodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapBnodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapCnodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapDnodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapEnodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapFnodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapGnodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapHnodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapInodes.csv");
-            nodeDatabase.readNodeCSV("/rez/MapWnodes.csv");
-            nodeDatabase.queryAllNodes();
-            nodeDatabase.insertNodesFromCSV();
 
-            staffDatabase.readStaffCSV("/rez/staffMembers.csv");
-            staffDatabase.queryStaff();
-            staffDatabase.insertStaffFromCSV();
-        //}
+        nodeDatabase.readNodeCSV("/allNodes.csv");
+        nodeDatabase.insertNodesFromCSV();
+
+        staffDatabase.readStaffCSV("/rez/staffMembers.csv");
+        staffDatabase.insertStaffFromCSV();
+
 //        nodeDatabase.outputNodesCSV();
 //        staffDatabase.outputStaffCSV();
-        showServiceWindow(xcoord, ycoord, windowWidth, windowLength);
+
+        showServiceWindow(xcoord, ycoord, windowWidth, windowLength, cssPath);
+        System.out.println("destNodeID: " + destNodeID);
         RequestController.setLocation(destNodeID);
     }
 
-    private void showServiceWindow(final int xcoord, final int ycoord, final int windowWidth, final int windowLength) {
+    private void showServiceWindow(final int xcoord, final int ycoord, final int windowWidth, final int windowLength, String cssPath) {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/RequestAPI.fxml"));
@@ -74,8 +65,14 @@ public class SanitationService implements ExportableServiceComponent {
             return;
         }
 
+        Scene scene = new Scene(root, windowWidth, windowLength);
+        String style = getClass().getResource(cssPath).toExternalForm();
+        scene.getStylesheets().add(style);
+
+        //primaryStage.setScene(scene);
         primaryStage.setTitle("Make New Translation Request");
-        primaryStage.setScene(new Scene(root, windowWidth, windowLength));
+        primaryStage.setScene(scene);
+
         primaryStage.setX(xcoord);
         primaryStage.setY(ycoord);
         primaryStage.show();

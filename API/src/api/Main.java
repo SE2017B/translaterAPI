@@ -1,3 +1,4 @@
+/*
 package api;
 
 import db.nodeDatabase;
@@ -18,3 +19,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+*/
