@@ -42,7 +42,7 @@ public class SanitationService implements ExportableServiceComponent {
         staffDatabase.createStaffTable();
         serviceDatabase.createServiceTable();
 
-        nodeDatabase.readNodeCSV("/allNodes.csv");
+        nodeDatabase.readNodeCSV("/rez/allNodes.csv");
         nodeDatabase.insertNodesFromCSV();
 
         staffDatabase.readStaffCSV("/rez/staffMembers.csv");

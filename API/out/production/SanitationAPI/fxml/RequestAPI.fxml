@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Rollers.RequestController">
     <children>
         <GridPane layoutX="456.0" layoutY="303.0" prefHeight="800.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -36,12 +36,7 @@
                 <RowConstraints maxHeight="261.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Sanitation Service" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-                <JFXTabPane prefHeight="267.0" prefWidth="495.0" side="BOTTOM" tabMinHeight="60.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                <JFXTabPane prefHeight="581.0" prefWidth="600.0" side="BOTTOM" tabMinHeight="60.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
                     <tabs>
                         <Tab text="Request Service">
                             <content>
@@ -79,13 +74,13 @@
                                                 </Label>
                                                 <JFXButton fx:id="btncreate" onAction="#requestCreatePressed" prefHeight="50.0" prefWidth="150.0" text="Create" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                                                 <JFXButton fx:id="btncancel" onAction="#cancelPressed" prefHeight="50.0" prefWidth="150.0" text="Clear" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                                                <JFXDatePicker fx:id="dateMenu" defaultColor="#64fff0" prefWidth="150.0" style="-fx: #ffffff;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                                <JFXDatePicker fx:id="dateMenu" defaultColor="#64fff0" onAction="#dateSelected" prefWidth="150.0" style="-fx: #ffffff;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                                                 <Label text="Staff Member" GridPane.halignment="CENTER">
                                                     <font>
                                                         <Font size="18.0" />
                                                     </font>
                                                 </Label>
-                                                <JFXTimePicker fx:id="timeMenu" defaultColor="#34f8e4" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                                <JFXTimePicker fx:id="timeMenu" defaultColor="#34f8e4" onAction="#timeSelected" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                                                 <Label text="Addition Comments" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                                                     <font>
                                                         <Font size="18.0" />
@@ -194,7 +189,7 @@
                         </Tab>
                         <Tab fx:id="staffManagementTab" text="Staff Management">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane">
                                     <children>
                                         <JFXTabPane layoutX="364.0" layoutY="174.0" prefHeight="597.6" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <tabs>
@@ -212,7 +207,7 @@
                                                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="5.0" vgrow="SOMETIMES" />
                                                                     </rowConstraints>
                                                                     <children>
                                                                         <JFXTextField fx:id="usernameTxt" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Username" unFocusColor="WHITE" GridPane.columnIndex="1">
@@ -244,7 +239,7 @@
                                                             <children>
                                                                 <SplitPane dividerPositions="0.3996655518394649" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <items>
-                                                                        <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                        <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="pane">
                                                                             <children>
                                                                                 <GridPane prefHeight="560.8" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                     <columnConstraints>
@@ -301,7 +296,7 @@
                                                                     <children>
                                                                         <SplitPane dividerPositions="0.40301003344481606" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                             <items>
-                                                                                <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="pane">
                                                                                     <children>
                                                                                         <GridPane prefHeight="560.8" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                             <columnConstraints>
@@ -380,6 +375,12 @@
                     <GridPane.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                     </GridPane.margin></JFXButton>
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="tab-pane" GridPane.columnSpan="3" />
+                <Label text="Sanitation Service" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
             </children>
         </GridPane>
     </children>

@@ -36,12 +36,7 @@
                 <RowConstraints maxHeight="261.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Sanitation Service" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-                <JFXTabPane prefHeight="267.0" prefWidth="495.0" side="BOTTOM" tabMinHeight="60.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                <JFXTabPane prefHeight="581.0" prefWidth="600.0" side="BOTTOM" tabMinHeight="60.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
                     <tabs>
                         <Tab text="Request Service">
                             <content>
@@ -194,7 +189,7 @@
                         </Tab>
                         <Tab fx:id="staffManagementTab" text="Staff Management">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane">
                                     <children>
                                         <JFXTabPane layoutX="364.0" layoutY="174.0" prefHeight="597.6" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <tabs>
@@ -244,7 +239,7 @@
                                                             <children>
                                                                 <SplitPane dividerPositions="0.3996655518394649" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <items>
-                                                                        <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                        <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="pane">
                                                                             <children>
                                                                                 <GridPane prefHeight="560.8" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                     <columnConstraints>
@@ -301,7 +296,7 @@
                                                                     <children>
                                                                         <SplitPane dividerPositions="0.40301003344481606" prefHeight="562.4" prefWidth="1279.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                             <items>
-                                                                                <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="pane">
                                                                                     <children>
                                                                                         <GridPane prefHeight="560.8" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                                             <columnConstraints>
@@ -380,6 +375,12 @@
                     <GridPane.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                     </GridPane.margin></JFXButton>
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="tab-pane" GridPane.columnSpan="3" />
+                <Label text="Sanitation Service" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
             </children>
         </GridPane>
     </children>
